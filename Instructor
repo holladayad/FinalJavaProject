@@ -2,5 +2,44 @@ package FinalProject.FinalJavaProject;
 
 public class Instructor
 {
-
+  private String name;
+  private String prefix;
+  private String officeLocation;
+  private String department;
+  private String email;
+  private int instructorID;
+  private static int nextInstructID;
+  
+  public Instructor(String name, String prefix, String office, String dept, String email)
+  {
+  
+  }
+  
+  public setName(String name)
+  {
+  }
+  
+  public setPrefix(String prefix)
+  {
+  }
+  
+  public setDepartment(String dept)
+  {
+  }
+  
+  public setEmail(String email)
+  {
+  }
+  
+  public setOfficeLocation(String office)
+  {
+  }
+  
+  public String getTitle()
+  {
+  }
+  
+  public String toString()
+  {
+  }
 }
