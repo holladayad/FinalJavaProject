@@ -1,4 +1,9 @@
-// Created By Paige Kowahl
+/*
+Author: Paige Kowahl (unless otherwise noted), Amber Holladay
+Date: Apr 21, 2020
+Assignment: Group Project Part 1
+Purpose: Instructor Class to create new Instructor Objects for the overall program.
+ */
 package FinalProject.FinalJavaProject;
 
 
@@ -18,7 +23,25 @@ public class Instructor
         this.prefix = prefix;
         this.officeLocation = office;
         this.department = dept;
-        this.email = email;
+        
+        boolean containsAt = false;
+        for(int i = 0; i < email.length(); i++)
+        {
+            
+            if(email.charAt(i) == '@')
+            {
+                containsAt = true;
+            }
+        }
+        if(containsAt = true)
+        {
+            this.email = email;
+        }
+        else
+        {
+            this.email = "Error! Invalid email address!";
+        }
+        
         instructorID = nextInstructorID;
         nextInstructorID++;
     }
@@ -53,8 +76,7 @@ public class Instructor
         return this.prefix;
     }
     
-    @Override
-    public String toString()
+    public String toString() //Amber Holladay
     {
         return "Name: " + this.name + " Department: " + this.department + " Office: "
                 + this.officeLocation + " Email: " + this.email;
