@@ -1,3 +1,4 @@
+// Created By Paige Kowahl
 package FinalProject.FinalJavaProject;
 
 
@@ -52,9 +53,10 @@ public class Instructor
         return this.prefix;
     }
     
+    @Override
     public String toString()
     {
-        return "Name: " + name + " Department: " + department + " Office: "
-                + officeLocation + " Email: " + email;
+        return "Name: " + this.name + " Department: " + this.department + " Office: "
+                + this.officeLocation + " Email: " + this.email;
     }
 }
