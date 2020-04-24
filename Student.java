@@ -18,21 +18,21 @@ public class Student {
         
         String first; //first name 
         String last; //last name
-        int end; //end of first name
+        int end = 0; //end of first name
         int beg; //beg of last name
         
         //Find the first name index values
-        for (int count = 0; count < this.name.length(); count++){
-            if (this.name.charAt(count) == ' '){ //if the current character is a space, record the index
+        for (int count = 0; count < name.length(); count++){
+            if (name.charAt(count) == ' '){ //if the current character is a space, record the index
                 end = count;
             }
         }      
         beg = end + 1; //record the index of the beginning of the last name
                 
         first = name.substring(0, end);
-        last = name.substring(beg, name.length)
+        last = name.substring(beg, name.length());
         
-        String newYear;
+        String newYear = "";
         
         switch (year) {
             case 1: newYear = "Freshman";
@@ -55,15 +55,15 @@ public class Student {
         test = false;
         
         while (test == false){
-            for (int i = 0; i < this.email.length(); i++){
-                if (this.email.charAt(i) == '@'){
-                    test = true
+            for (int i = 0; i < email.length(); i++){
+                if (email.charAt(i) == '@'){
+                    test = true;
                 }
             }
 
             if (test == false){
                 System.out.print("Error! Invalid email address.\nPlease enter a new email address: ");
-                    email = in.nextString();
+                    email = in.toString();
             }
         }
             
@@ -105,7 +105,7 @@ public class Student {
     
     public void setStudentEmail(String email){
         
-        this.StudentEmail = email;
+        this.studentEmail = email;
     }
     
     
@@ -117,7 +117,20 @@ public class Student {
     
     public void setStudentYear(int year){
         
-        this.StudentYear = year;
+        String newYear = "";
+        
+        switch (year) {
+            case 1: newYear = "Freshman";
+            break;
+            case 2: newYear = "Sophomore";
+            break;
+            case 3: newYear = "Junior";
+            break;
+            case 4: newYear = "Senior";
+            break;
+        }
+        this.studentYear = newYear;                
+        
     }
     
     
@@ -129,6 +142,6 @@ public class Student {
     
     public void setStudentMajor(String major){
         
-        this.StudentMajor = major;
+        this.studentMajor = major;
     }
 }
