@@ -35,27 +35,89 @@ public class StudentManagementSystem {
 
             if(userSelect == 1)
             {
-            // Needs error checking for email and GPA
+                System.out.println("Creating Class...");
+                System.out.println("Enter Course Name: ");
+                System.out.println("Enter Building: ");
+                System.out.println("Enter Room Number: ");
+                System.out.println("Enter Room Capacity: ");
             }
 
             if(userSelect == 2)
             {
+                System.out.println("Enter Student Information: ");
+                System.out.println("Name (firstname lastname): ");
                 
+                System.out.println("Major: ");
+                System.out.println("Year: ");
+                System.out.println("GPA: ");
+                System.out.println("Email: ");
+                
+                while (GPA > 5.0 | GPA < 0.0){
+                    System.out.print ("Error! Invalid GPA. GPA must be between 0.0 and 5.0.\nPlease enter a new GPA: ");
+                    GPA = in.nextDouble();
+                }
+
+                boolean test;
+                test = false;
+
+                while (test == false){
+                    for (int i = 0; i < email.length(); i++){
+                        if (email.charAt(i) == '@'){
+                            test = true;
+                        }
+                    }
+
+                    if (test == false){
+                        System.out.print("Error! Invalid email address.\nPlease enter a new email address: ");
+                        email = in.toString();
+                    }
+                }
+                
+                System.out.println("Please Choose a Class: "); // Print all created courses
+                System.out.println("Choose Class #: "); // User input course #
             }
 
             if(userSelect == 3)
             {
-                
+                System.out.println("Please Choose a Student: "); // Print all created courses
+                System.out.println("Type ID of Student to Remove: "); // User input course #
+                System.out.println("Student Successfully Removed!");
             }
 
             if(userSelect == 4)
             {
-            // Needs error checking for email
+                System.out.println("Enter Instructor Information");
+                System.out.println("Name: ");
+                System.out.println("Prefix: ");
+                System.out.println("Office: ");
+                System.out.println("Department: ");
+                System.out.println("Email: ");
+                
+                boolean test;
+                test = false;
+
+                while (test == false){
+                    for (int i = 0; i < email.length(); i++){
+                        if (email.charAt(i) == '@'){
+                            test = true;
+                        }
+                    }
+
+                    if (test == false){
+                        System.out.print("Error! Invalid email address.\nPlease enter a new email address: ");
+                        email = in.toString();
+                    }
+                }
+                
+                System.out.println("Please Choose a Couse for this Instructor: "); // Print all created courses
+                System.out.println("Choose Class #: "); // User input course #
             }
 
             if(userSelect == 5)
             {
-                
+                System.out.println("Please Choose a Class: "); // Print all created courses
+                System.out.println("Choose Class #: "); // User input course #
+                // Print all student info
             }
             
             System.out.println("Student Management System");

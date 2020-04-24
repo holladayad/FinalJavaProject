@@ -50,28 +50,6 @@ public class Student {
             case 4: newYear = "Senior";
             break;
         }
-        
-        while (GPA > 5.0 | GPA < 0.0){
-            
-            System.out.print ("Error! Invalid GPA. GPA must be between 0.0 and 5.0.\nPlease enter a new GPA: ");
-            GPA = in.nextDouble();
-        }
-        
-        boolean test;
-        test = false;
-        
-        while (test == false){
-            for (int i = 0; i < email.length(); i++){
-                if (email.charAt(i) == '@'){
-                    test = true;
-                }
-            }
-
-            if (test == false){
-                System.out.print("Error! Invalid email address.\nPlease enter a new email address: ");
-                    email = in.toString();
-            }
-        }
             
         this.firstName = first;
         this.lastName = last;

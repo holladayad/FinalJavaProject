@@ -23,25 +23,7 @@ public class Instructor
         this.prefix = prefix;
         this.officeLocation = office;
         this.department = dept;
-        
-        boolean containsAt = false;
-        for(int i = 0; i < email.length(); i++)
-        {
-            
-            if(email.charAt(i) == '@')
-            {
-                containsAt = true;
-            }
-        }
-        if(containsAt = true)
-        {
-            this.email = email;
-        }
-        else
-        {
-            this.email = "Error! Invalid email address!";
-        }
-        
+        this.email = email;
         instructorID = nextInstructorID;
         nextInstructorID++;
     }
