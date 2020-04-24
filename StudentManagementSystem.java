@@ -10,9 +10,6 @@ import java.util.Scanner;
 
 public class StudentManagementSystem {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         int userSelect;
         Scanner in = new Scanner(System.in);
