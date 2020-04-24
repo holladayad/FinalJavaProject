@@ -18,19 +18,10 @@ public class StudentManagementSystem {
     
     
     
-    public static void main(String[] args) {
-        
-        
-        //DELETE
-        Course testCourse = new Course("CIS331", "Showker", "G101", 35);
-        
-        courseArray.add(testCourse);
-        
+    public static void main(String[] args)
+    {
         int userSelect;
         Scanner in = new Scanner(System.in);
-        
-        
-        
 
         System.out.println("Student Management System");
         System.out.println("Please make a menu choice below:");
@@ -45,10 +36,10 @@ public class StudentManagementSystem {
         System.out.print("Choice: ");
         userSelect = in.nextInt();
 
-        while (userSelect != 6)
+        while (userSelect != 6) // If 6, exits
         {
 
-            if(userSelect == 1)
+            if(userSelect == 1) // Create a Course
             {
                 String name = "";
                 String building = "";
@@ -66,19 +57,19 @@ public class StudentManagementSystem {
                 capacity = in.nextInt();
                 
                 Course newCourse = new Course(name, building, room, capacity);
+                
                 courseArray.add(newCourse);
                 
             }
 
-            if(userSelect == 2)
+            if(userSelect == 2) // Add student to Course
             {
                 String name = "";
                 String major = "";
-                int year = "";
+                int year = 0;
                 double gpa = 0.0;
                 String email = "";
                 
-                // Consumes the new line
                 in.nextLine();
                 System.out.println("Enter Student Information: ");
                 System.out.print("Name (firstname lastname): ");
@@ -89,9 +80,6 @@ public class StudentManagementSystem {
                 year = in.nextInt();
                 System.out.print("GPA: ");
                 gpa = in.nextDouble();
-                
-                //consumes the new line
-                in.nextLine();
                 System.out.print("Email: ");
                 email = in.nextLine();
                 
