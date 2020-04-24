@@ -62,7 +62,6 @@ public class Student {
         nextStudentID++;
     }
     
-    
     public void setGPA(double GPA){
         
         this.GPA = GPA;
@@ -73,7 +72,6 @@ public class Student {
         
         return this.GPA;
     }
-    
     
     public String getName(){
         
@@ -117,12 +115,10 @@ public class Student {
         
     }
     
-    
     public String getStudentMajor(){
         
         return this.studentMajor;
     }
-    
     
     public void setStudentMajor(String major){
         
