@@ -58,6 +58,7 @@ public class Instructor
         return this.prefix;
     }
     
+    @Override
     public String toString() //Amber Holladay
     {
         return "Name: " + this.name + " Department: " + this.department + " Office: "
