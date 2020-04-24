@@ -1,5 +1,9 @@
-// Created By Amber Holladay and Gonzo Ocampo
-// Course Class
+/*
+Author: Amber Holladay & Gonzo Ocampo
+Date: Apr 22, 2020
+Assignment: Group Project Part 1
+Purpose: Course Class to create new Course Objects for the overall program.
+ */
 
 package FinalProject.FinalJavaProject;
 import java.util.*;
