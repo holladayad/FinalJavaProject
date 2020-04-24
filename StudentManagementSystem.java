@@ -74,7 +74,7 @@ public class StudentManagementSystem {
             {
                 String name = "";
                 String major = "";
-                String year = "";
+                int year = "";
                 double gpa = 0.0;
                 String email = "";
                 
@@ -86,7 +86,7 @@ public class StudentManagementSystem {
                 System.out.print("Major: ");
                 major = in.nextLine();
                 System.out.print("Year: ");
-                year = in.nextLine();
+                year = in.nextInt();
                 System.out.print("GPA: ");
                 gpa = in.nextDouble();
                 
@@ -119,15 +119,20 @@ public class StudentManagementSystem {
                 System.out.println("Please Choose a Class: ");
                 for(int i = 0; i < courseArray.size(); i++)
                 {
-                    System.out.println(courseArray.get(i));
+                    Course printCourse = courseArray.get(i);
                     
+                    System.out.println(printCourse.toString());
                 }
+                
+                Student addStudent = new Student(name, year, major, gpa, email);
                 
                 int classChoice;
                 System.out.println("Choose Class #: ");
                 classChoice = in.nextInt();
                 
-                //ADD STUDENT TO COURSE
+                Course courseSelection = courseArray.get(classChoice);
+                
+                courseSelection.enrollStudent(addStudent);
             }
 
             if(userSelect == 3)
@@ -138,7 +143,9 @@ public class StudentManagementSystem {
                 System.out.println("\nPlease choose a class:");
                 
                 for (int i = 0; i < courseArray.size(); i++){
-                    //System.out.println(courseArray.get(i));
+                    Course printCourse = courseArray.get(i);
+                    
+                    System.out.println(printCourse.toString());
                 }
                 
                 System.out.println("------------------");
@@ -206,8 +213,9 @@ public class StudentManagementSystem {
                 
                 for(int i = 0; i < courseArray.size(); i++)
                 {
-                    System.out.println(courseArray.get(i));
+                    Course printCourse = courseArray.get(i);
                     
+                    System.out.println(printCourse.toString());
                 }
                 
                 System.out.println("Choose Class #: ");
