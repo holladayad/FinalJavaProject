@@ -17,6 +17,7 @@ public class Instructor
     private int instructorID;
     private static int nextInstructorID = 2000;
     
+    // Constructor
     public Instructor(String name, String prefix, String office, String dept, String email)
     {
         this.name = name;
