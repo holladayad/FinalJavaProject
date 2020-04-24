@@ -32,20 +32,6 @@ public class StudentManagementSystem {
 
         while (userSelect != 6)
         {
-            if(userSelect <= 0 || userSelect >= 7)
-            {
-            System.out.println("Student Management System");
-            System.out.println("Please make a menu choice below:");
-            System.out.println("--------------------------------");
-            System.out.println("1: Create a Course");
-            System.out.println("2: Add Student to Course");
-            System.out.println("3: Remove Student from Course");
-            System.out.println("4: Add Instructor to Course");
-            System.out.println("5: Print Roster for Course");
-            System.out.println("6: Quit");
-
-            userSelect = in.nextInt();
-            }
 
             if(userSelect == 1)
             {
@@ -71,6 +57,18 @@ public class StudentManagementSystem {
             {
                 
             }
+            
+            System.out.println("Student Management System");
+            System.out.println("Please make a menu choice below:");
+            System.out.println("--------------------------------");
+            System.out.println("1: Create a Course");
+            System.out.println("2: Add Student to Course");
+            System.out.println("3: Remove Student from Course");
+            System.out.println("4: Add Instructor to Course");
+            System.out.println("5: Print Roster for Course");
+            System.out.println("6: Quit");
+
+            userSelect = in.nextInt();
         }
     }
     
