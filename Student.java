@@ -1,3 +1,9 @@
+/*
+Author: Emma Morell (unless otherwise noted), Amber Holladay
+Date: Apr 24, 2020
+Assignment: Group Project Part 1
+Purpose: Student Class to create new Student Objects for the overall program.
+ */
 package FinalProject.FinalJavaProject;
 
 import java.util.*;
@@ -84,7 +90,7 @@ public class Student {
         this.GPA = GPA;
     }
     
-    
+    //Start Amber Holladay
     public double getGPA(){
         
         return this.GPA;
@@ -101,19 +107,19 @@ public class Student {
         
         return this.studentID;
     }
-    
+    //End Amber Holladay
     
     public void setStudentEmail(String email){
         
         this.studentEmail = email;
     }
     
-    
+    //Begin Amber Holladay
     public String getStudentYear(){
         
         return this.studentYear;
     }
-    
+    //End Amber Holladay
     
     public void setStudentYear(int year){
         
