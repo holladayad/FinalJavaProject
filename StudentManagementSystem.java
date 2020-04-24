@@ -6,10 +6,14 @@ Purpose: To run the Student Management System
  */
 package FinalProject.FinalJavaProject;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class StudentManagementSystem {
 
+    public static ArrayList<Student> studentArray = new ArrayList<>();
+    public static ArrayList<Course> courseArray = new ArrayList<>();
+    public static ArrayList<Instructor> instructorArray = new ArrayList<>();
+    
     public static void main(String[] args) {
         int userSelect;
         Scanner in = new Scanner(System.in);
