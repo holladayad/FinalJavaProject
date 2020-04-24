@@ -10,13 +10,9 @@ import java.util.*;
 
 public class StudentManagementSystem {
     
-    
-    
     public static ArrayList<Student> studentArray = new ArrayList<>();
     public static ArrayList<Course> courseArray = new ArrayList<>();
     public static ArrayList<Instructor> instructorArray = new ArrayList<>();
-    
-    
     
     public static void main(String[] args)
     {
@@ -70,7 +66,8 @@ public class StudentManagementSystem {
                 double gpa = 0.0;
                 String email = "";
                 
-                in.nextLine();
+                
+                in.nextLine(); // Consumes the new line
                 System.out.println("Enter Student Information: ");
                 System.out.print("Name (firstname lastname): ");
                 name = in.nextLine();
@@ -83,11 +80,13 @@ public class StudentManagementSystem {
                 System.out.print("Email: ");
                 email = in.nextLine();
                 
+                // Check for valid GPA Value
                 while (gpa > 5.0 | gpa < 0.0){
                     System.out.print ("Error! Invalid GPA. GPA must be between 0.0 and 5.0.\nPlease enter a new GPA: ");
                     gpa = in.nextDouble();
                 }
-
+                
+                // Check for valid Email
                 boolean test;
                 test = false;
 
@@ -123,12 +122,12 @@ public class StudentManagementSystem {
                 courseSelection.enrollStudent(addStudent);
             }
 
-            if(userSelect == 3)
+            if(userSelect == 3) // Remove Student from Course
             {
                 int courseNum = 0;
                 int studentNum = 0;
                 
-                System.out.println("\nPlease choose a class:");
+                System.out.println("Please choose a class:");
                 
                 for (int i = 0; i < courseArray.size(); i++){
                     Course printCourse = courseArray.get(i);
@@ -140,23 +139,22 @@ public class StudentManagementSystem {
                 System.out.println("Choose Class #: ");
                 courseNum = in.nextInt();
                 
+                Course selectedCourse = courseArray.get(courseNum);
+                
                 System.out.println("------------------");
-                System.out.println("Please Choose a Student: ");
+                System.out.println("Please Choose a Student:");
                 
                 System.out.println(courseArray.get(courseNum).getRoster());
                 
                 System.out.println("Type ID of Student to Remove: ");
                 studentNum = in.nextInt();
-                
 
-        // for loop over the courses to find the one that matches the ID
                 courseArray.get(courseNum).removeStudent(studentNum);
-                
                 
                 System.out.println("Student Successfully Removed!");
             }
 
-            if(userSelect == 4)
+            if(userSelect == 4) // Add Instructor to Course
             {
                 System.out.println("Enter Instructor Information");
                 
@@ -175,25 +173,27 @@ public class StudentManagementSystem {
                 System.out.println("Email: ");
                 String email = in.nextLine();
                 
+                // Checks for valid email
                 boolean test;
                 test = false;
 
-                while (test == false){
-                    for (int i = 0; i < email.length(); i++){
+                while (test == false)
+                {
+                    for (int i = 0; i < email.length(); i++)
+                    {
                         if (email.charAt(i) == '@'){
                             test = true;
                         }
                     }
 
-                    if (test == false){
+                    if (test == false)
+                    {
                         System.out.print("Error! Invalid email address.\nPlease enter a new email address: ");
                         email = in.toString();
                     }
                 }
                 
-                Instructor newInstructor = new Instructor(name, prefix, office, dept, email);
-                
-                instructorArray.add(newInstructor);
+                Instructor addInstructor = new Instructor(name, prefix, office, dept, email);
                 
                 int classSelect = 0;
                 
@@ -209,10 +209,13 @@ public class StudentManagementSystem {
                 System.out.println("Choose Class #: ");
                 classSelect = in.nextInt();
                 
-                //Add instructor to course
+                Course assignedCourse = courseArray.get(classSelect);
+                
+                assignedCourse.assignInstructor(addInstructor);
+                
             }
 
-            if(userSelect == 5)
+            if(userSelect == 5) // Prints Course Roster
             {
                 int courseSelect = 0;
                 
@@ -228,7 +231,9 @@ public class StudentManagementSystem {
                 System.out.println("Choose Class #: ");
                 courseSelect = in.nextInt();
                 
-                System.out.println(courseArray.get(courseSelect).getRoster());
+                Course printCourse = courseArray.get(courseSelect);
+                
+                System.out.println(printCourse.getRoster());
             }
             
             System.out.println("Student Management System");
@@ -244,7 +249,6 @@ public class StudentManagementSystem {
             userSelect = in.nextInt();
         }
         
-        System.out.println("Exiting...");
+        System.out.println("Exiting..."); // If 6 is input
     }
-    
 }
