@@ -1,10 +1,13 @@
-// Created By Amber Holladay and Gonzo Ocampo
-// Course Class
+/*
+Author: Amber Holladay and Gonzo Ocamp
+Date: Apr 24, 2020
+Assignment: Group Project Part 1
+Purpose: Course Class to create new Course objects for overall program
+ */
 
 package FinalProject.FinalJavaProject;
 import java.util.*;
 
-// test 
 public class Course 
 {
    private String courseName; 
@@ -26,12 +29,7 @@ public class Course
         this.courseCapacity = capacity;
         this.enrolledStudents = new ArrayList<>();
         this.courseInstructor = null;
-        
-        
-        // I don't think this will work well
-        //  this needs to be added into main:   (So im writing the class assuming its already in there 
-        // public static ArrayList<Student> studentList = new ArrayList<Student>();
-        // Application.studentList.add(this);
+
     }
     
    public void enrollStudent(Student newStudent)
