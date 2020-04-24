@@ -28,6 +28,7 @@ public class StudentManagementSystem {
         System.out.println("5: Print Roster for Course");
         System.out.println("6: Quit");
 
+        System.out.print("Choice: ");
         userSelect = in.nextInt();
 
         while (userSelect != 6)
@@ -35,26 +36,49 @@ public class StudentManagementSystem {
 
             if(userSelect == 1)
             {
+                String name = "";
+                String building = "";
+                String room = "";
+                int capacity = 0;
+                
                 System.out.println("Creating Class...");
                 System.out.println("Enter Course Name: ");
+                name = in.nextLine();
                 System.out.println("Enter Building: ");
+                building = in.nextLine();
                 System.out.println("Enter Room Number: ");
+                room = in.nextLine();
                 System.out.println("Enter Room Capacity: ");
+                capacity = in.nextInt();
+                
+                Course newCourse = new Course(name, building, room, capacity);
+                courseArray.add(newCourse);
+                
             }
 
             if(userSelect == 2)
             {
+                String name = "";
+                String major = "";
+                int year = 0;
+                double gpa = 0.0;
+                String email = "";
+                
                 System.out.println("Enter Student Information: ");
                 System.out.println("Name (firstname lastname): ");
-                
+                name = in.nextLine();
                 System.out.println("Major: ");
+                major = in.nextLine();
                 System.out.println("Year: ");
+                year = in.nextInt();
                 System.out.println("GPA: ");
+                gpa = in.nextDouble();
                 System.out.println("Email: ");
+                email = in.nextLine();
                 
-                while (GPA > 5.0 | GPA < 0.0){
+                while (gpa > 5.0 | gpa < 0.0){
                     System.out.print ("Error! Invalid GPA. GPA must be between 0.0 and 5.0.\nPlease enter a new GPA: ");
-                    GPA = in.nextDouble();
+                    gpa = in.nextDouble();
                 }
 
                 boolean test;
@@ -73,14 +97,44 @@ public class StudentManagementSystem {
                     }
                 }
                 
-                System.out.println("Please Choose a Class: "); // Print all created courses
-                System.out.println("Choose Class #: "); // User input course #
+                System.out.println("Please Choose a Class: ");
+                for(int i = 0; i < courseArray.size(); i++)
+                {
+                    //System.out.println(courseArray.get(i));
+                    
+                }
+                
+                int classChoice;
+                System.out.println("Choose Class #: ");
+                classChoice = in.nextInt();
+                
+                //ADD STUDENT TO COURSE
             }
 
             if(userSelect == 3)
             {
-                System.out.println("Please Choose a Student: "); // Print all created courses
-                System.out.println("Type ID of Student to Remove: "); // User input course #
+                int courseNum = 0;
+                int studentNum = 0;
+                
+                System.out.println("\nPlease choose a class:");
+                
+                for (int i = 0; i < courseArray.size(); i++){
+                    //System.out.println(courseArray.get(i));
+                }
+                
+                System.out.println("------------------");
+                System.out.println("Choose Class #: ");
+                courseNum = in.nextInt();
+                
+                System.out.println("------------------");
+                System.out.println("Please Choose a Student: ");
+                
+                
+                //print each student in selected course
+                
+                System.out.println("Type ID of Student to Remove: ");
+                studentNum = in.nextInt();
+                
                 System.out.println("Student Successfully Removed!");
             }
 
@@ -132,6 +186,8 @@ public class StudentManagementSystem {
 
             userSelect = in.nextInt();
         }
+        
+        System.out.println("Exiting...");
     }
     
 }
