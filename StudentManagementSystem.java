@@ -10,9 +10,6 @@ import java.util.Scanner;
 
 public class StudentManagementSystem {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         int userSelect;
         Scanner in = new Scanner(System.in);
@@ -29,46 +26,44 @@ public class StudentManagementSystem {
 
         userSelect = in.nextInt();
 
-        if(userSelect == 0)
+        while (userSelect != 6)
         {
-        System.out.println("Student Management System");
-        System.out.println("Please make a menu choice below:");
-        System.out.println("--------------------------------");
-        System.out.println("1: Create a Course");
-        System.out.println("2: Add Student to Course");
-        System.out.println("3: Remove Student from Course");
-        System.out.println("4: Add Instructor to Course");
-        System.out.println("5: Print Roster for Course");
-        System.out.println("6: Quit");
+            if(userSelect <= 0 || userSelect >= 7)
+            {
+            System.out.println("Student Management System");
+            System.out.println("Please make a menu choice below:");
+            System.out.println("--------------------------------");
+            System.out.println("1: Create a Course");
+            System.out.println("2: Add Student to Course");
+            System.out.println("3: Remove Student from Course");
+            System.out.println("4: Add Instructor to Course");
+            System.out.println("5: Print Roster for Course");
+            System.out.println("6: Quit");
 
-        userSelect = in.nextInt();
-        }
+            userSelect = in.nextInt();
+            }
 
-        if(userSelect == 1)
-        {
-        // Needs error checking for email and GPA
-        }
+            if(userSelect == 1)
+            {
+            // Needs error checking for email and GPA
+            }
 
-        if(userSelect == 2)
-        {
-        }
+            if(userSelect == 2)
+            {
+            }
 
-        if(userSelect == 3)
-        {
-        }
+            if(userSelect == 3)
+            {
+            }
 
-        if(userSelect == 4)
-        {
-        // Needs error checking for email
-        }
+            if(userSelect == 4)
+            {
+            // Needs error checking for email
+            }
 
-        if(userSelect == 5)
-        {
-        }
-
-        if(userSelect == 6)
-        {
-        System.out.println("Exiting...");
+            if(userSelect == 5)
+            {
+            }
         }
     }
     
