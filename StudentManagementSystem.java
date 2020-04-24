@@ -129,11 +129,12 @@ public class StudentManagementSystem {
                 System.out.println("------------------");
                 System.out.println("Please Choose a Student: ");
                 
-                
-                //print each student in selected course
+                courseArray.get(courseNum).getRoster();
                 
                 System.out.println("Type ID of Student to Remove: ");
                 studentNum = in.nextInt();
+                
+                //Course.removeStudent(studentNum);
                 
                 System.out.println("Student Successfully Removed!");
             }
@@ -141,11 +142,21 @@ public class StudentManagementSystem {
             if(userSelect == 4)
             {
                 System.out.println("Enter Instructor Information");
+                
                 System.out.println("Name: ");
+                String name = in.nextLine();
+                
                 System.out.println("Prefix: ");
+                String prefix = in.nextLine();
+                        
                 System.out.println("Office: ");
+                String office = in.nextLine();
+                
                 System.out.println("Department: ");
+                String dept = in.nextLine();
+                
                 System.out.println("Email: ");
+                String email = in.nextLine();
                 
                 boolean test;
                 test = false;
@@ -163,15 +174,43 @@ public class StudentManagementSystem {
                     }
                 }
                 
-                System.out.println("Please Choose a Couse for this Instructor: "); // Print all created courses
-                System.out.println("Choose Class #: "); // User input course #
+                Instructor newInstructor = new Instructor(name, prefix, office, dept, email);
+                
+                instructorArray.add(newInstructor);
+                
+                int classSelect = 0;
+                
+                System.out.println("Please Choose a Course for this Instructor: ");
+                
+                for(int i = 0; i < courseArray.size(); i++)
+                {
+                    //System.out.println(courseArray.get(i));
+                    
+                }
+                
+                System.out.println("Choose Class #: ");
+                classSelect = in.nextInt();
+                
+                //Add instructor to course
             }
 
             if(userSelect == 5)
             {
-                System.out.println("Please Choose a Class: "); // Print all created courses
-                System.out.println("Choose Class #: "); // User input course #
-                // Print all student info
+                int courseSelect = 0;
+                
+                System.out.println("Please Choose a Class: ");
+                
+                for(int i = 0; i < courseArray.size(); i++)
+                {
+                    //System.out.println(courseArray.get(i));
+                    
+                }
+                
+                System.out.println("------------------");
+                System.out.println("Choose Class #: ");
+                courseSelect = in.nextInt();
+                
+                courseArray.get(courseSelect).getRoster();
             }
             
             System.out.println("Student Management System");
