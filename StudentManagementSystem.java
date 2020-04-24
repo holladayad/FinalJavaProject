@@ -9,14 +9,28 @@ package FinalProject.FinalJavaProject;
 import java.util.*;
 
 public class StudentManagementSystem {
-
+    
+    
+    
     public static ArrayList<Student> studentArray = new ArrayList<>();
     public static ArrayList<Course> courseArray = new ArrayList<>();
     public static ArrayList<Instructor> instructorArray = new ArrayList<>();
     
+    
+    
     public static void main(String[] args) {
+        
+        
+        //DELETE
+        Course testCourse = new Course("CIS331", "Showker", "G101", 35);
+        
+        courseArray.add(testCourse);
+        
         int userSelect;
         Scanner in = new Scanner(System.in);
+        
+        
+        
 
         System.out.println("Student Management System");
         System.out.println("Please make a menu choice below:");
@@ -60,20 +74,25 @@ public class StudentManagementSystem {
             {
                 String name = "";
                 String major = "";
-                int year = 0;
+                String year = "";
                 double gpa = 0.0;
                 String email = "";
                 
+                // Consumes the new line
+                in.nextLine();
                 System.out.println("Enter Student Information: ");
-                System.out.println("Name (firstname lastname): ");
+                System.out.print("Name (firstname lastname): ");
                 name = in.nextLine();
-                System.out.println("Major: ");
+                System.out.print("Major: ");
                 major = in.nextLine();
-                System.out.println("Year: ");
-                year = in.nextInt();
-                System.out.println("GPA: ");
+                System.out.print("Year: ");
+                year = in.nextLine();
+                System.out.print("GPA: ");
                 gpa = in.nextDouble();
-                System.out.println("Email: ");
+                
+                //consumes the new line
+                in.nextLine();
+                System.out.print("Email: ");
                 email = in.nextLine();
                 
                 while (gpa > 5.0 | gpa < 0.0){
@@ -93,14 +112,14 @@ public class StudentManagementSystem {
 
                     if (test == false){
                         System.out.print("Error! Invalid email address.\nPlease enter a new email address: ");
-                        email = in.toString();
+                        email = in.nextLine();
                     }
                 }
                 
                 System.out.println("Please Choose a Class: ");
                 for(int i = 0; i < courseArray.size(); i++)
                 {
-                    //System.out.println(courseArray.get(i));
+                    System.out.println(courseArray.get(i));
                     
                 }
                 
@@ -129,12 +148,15 @@ public class StudentManagementSystem {
                 System.out.println("------------------");
                 System.out.println("Please Choose a Student: ");
                 
-                courseArray.get(courseNum).getRoster();
+                System.out.println(courseArray.get(courseNum).getRoster());
                 
                 System.out.println("Type ID of Student to Remove: ");
                 studentNum = in.nextInt();
                 
-                //Course.removeStudent(studentNum);
+
+        // for loop over the courses to find the one that matches the ID
+                courseArray.get(courseNum).removeStudent(studentNum);
+                
                 
                 System.out.println("Student Successfully Removed!");
             }
@@ -184,7 +206,7 @@ public class StudentManagementSystem {
                 
                 for(int i = 0; i < courseArray.size(); i++)
                 {
-                    //System.out.println(courseArray.get(i));
+                    System.out.println(courseArray.get(i));
                     
                 }
                 
@@ -202,7 +224,7 @@ public class StudentManagementSystem {
                 
                 for(int i = 0; i < courseArray.size(); i++)
                 {
-                    //System.out.println(courseArray.get(i));
+                    System.out.println(courseArray.get(i));
                     
                 }
                 
@@ -210,7 +232,7 @@ public class StudentManagementSystem {
                 System.out.println("Choose Class #: ");
                 courseSelect = in.nextInt();
                 
-                courseArray.get(courseSelect).getRoster();
+                System.out.println(courseArray.get(courseSelect).getRoster());
             }
             
             System.out.println("Student Management System");
