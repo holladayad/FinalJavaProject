@@ -74,7 +74,7 @@ public class StudentManagementSystem {
             {
                 String name = "";
                 String major = "";
-                int year = "";
+                int year = 0;
                 double gpa = 0.0;
                 String email = "";
                 
