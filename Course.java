@@ -8,6 +8,7 @@ Purpose: Course Class to create new Course Objects for the overall program.
 package FinalProject.FinalJavaProject;
 import java.util.*;
 
+// test 
 public class Course 
 {
    private String courseName; 
