@@ -14,8 +14,12 @@ public class StudentManagementSystem {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) 
+    {
+        public static ArrayList<Student> studentArray = new ArrayList<>();
+        public static ArrayList<Course> courseArray = new ArrayList<>();
+        public static ArrayList<Instructor> instructorArray = new ArrayList<>();
+
     }
     
 }
