@@ -251,6 +251,7 @@ public class StudentManagementSystem {
             System.out.println("4: Add Instructor to Course");
             System.out.println("5: Print Roster for Course");
             System.out.println("6: Quit");
+            System.out.print("Choice: ");
 
             userSelect = in.nextInt();
         }
