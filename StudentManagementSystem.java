@@ -34,7 +34,7 @@ public class StudentManagementSystem {
 
         while (userSelect != 6) // If 6, exits
         {
-
+            
             if(userSelect == 1) // Create a Course
             {
                 String name = "";
@@ -42,16 +42,18 @@ public class StudentManagementSystem {
                 String room = "";
                 int capacity = 0;
                 
+                in.nextLine();
                 System.out.println("Creating Class...");
-                System.out.println("Enter Course Name: ");
+                System.out.print("Enter Course Name: ");
                 name = in.nextLine();
-                System.out.println("Enter Building: ");
+                System.out.print("Enter Building: ");
                 building = in.nextLine();
-                System.out.println("Enter Room Number: ");
+                System.out.print("Enter Room Number: ");
                 room = in.nextLine();
-                System.out.println("Enter Room Capacity: ");
+                System.out.print("Enter Room Capacity: ");
                 capacity = in.nextInt();
                 
+                System.out.println();
                 Course newCourse = new Course(name, building, room, capacity);
                 
                 courseArray.add(newCourse);
@@ -77,6 +79,7 @@ public class StudentManagementSystem {
                 year = in.nextInt();
                 System.out.print("GPA: ");
                 gpa = in.nextDouble();
+                in.nextLine();
                 System.out.print("Email: ");
                 email = in.nextLine();
                 
@@ -102,7 +105,7 @@ public class StudentManagementSystem {
                         email = in.nextLine();
                     }
                 }
-                
+                System.out.println();
                 System.out.println("Please Choose a Class: ");
                 for(int i = 0; i < courseArray.size(); i++)
                 {
@@ -114,12 +117,14 @@ public class StudentManagementSystem {
                 Student addStudent = new Student(name, year, major, gpa, email);
                 
                 int classChoice;
-                System.out.println("Choose Class #: ");
+                System.out.print("Choose Class #: ");
                 classChoice = in.nextInt();
                 
                 Course courseSelection = courseArray.get(classChoice);
                 
                 courseSelection.enrollStudent(addStudent);
+                
+                System.out.println();
             }
 
             if(userSelect == 3) // Remove Student from Course
@@ -156,21 +161,22 @@ public class StudentManagementSystem {
 
             if(userSelect == 4) // Add Instructor to Course
             {
+                in.nextLine();
                 System.out.println("Enter Instructor Information");
                 
-                System.out.println("Name: ");
+                System.out.print("Name: ");
                 String name = in.nextLine();
                 
-                System.out.println("Prefix: ");
+                System.out.print("Prefix: ");
                 String prefix = in.nextLine();
                         
-                System.out.println("Office: ");
+                System.out.print("Office: ");
                 String office = in.nextLine();
                 
-                System.out.println("Department: ");
+                System.out.print("Department: ");
                 String dept = in.nextLine();
                 
-                System.out.println("Email: ");
+                System.out.print("Email: ");
                 String email = in.nextLine();
                 
                 // Checks for valid email
