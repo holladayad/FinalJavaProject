@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 // ComboBoxes
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
 
 public class StudentFXSystem extends Application {
     
@@ -86,8 +86,7 @@ public class StudentFXSystem extends Application {
     // Build a Course
     public Label lblAddStudent = new Label("Add Student:");
     public Label lblToCourse = new Label("To Course:");
-    public Label lblNewInstruct = new Label("New Instructor?");
-    public Label lblInstrucIs = new Label("Instrucotr is:");
+    public Label lblInstructIs = new Label("Instrucotr is:");
     
     // BUTTONS
     public Button btnAddStudent = new Button("Add Student ->");
@@ -95,7 +94,7 @@ public class StudentFXSystem extends Application {
     public Button btnAddInstructor = new Button("Add Instructor ->");
     public Button btnUpdateCourse = new Button("Update Course ->");
     
-    // COMBOBOX
+    // COMBOBOX - Listed in directions as pre-populated
     
     // Years
     public String years[] = { "Freshman", "Sophomore", "Junior", "Senior" };
@@ -116,14 +115,124 @@ public class StudentFXSystem extends Application {
     
     // Display Box
     public TextArea taDisplayArea = new TextArea();
+    
+    // Check Box
+    public CheckBox chkNewInstruct = new CheckBox("New Instructor?");
         
     @Override
     public void start(Stage primaryStage) {
-        //All Controls
+        // All Controls
         
-        //Pane
+        // Pane
+        GridPane primaryPane = new GridPane();
+        GridPane addStudentPane = new GridPane();
+        GridPane addCoursePane = new GridPane();
+        GridPane addInstructPane = new GridPane();
+        GridPane buildCoursePane = new GridPane();
+        
+        TabPane tpTabs = new TabPane();
+        Tab tabAddStudent = new Tab("Add Student");
+        Tab tabAddCourse = new Tab("Add Course");
+        Tab tabAddInstructor = new Tab("Add Instructor");
+        Tab tabBuildCourse = new Tab("Build a Course");
+        
+        tpTabs.getTabs().add(tabAddStudent);
+        tpTabs.getTabs().add(tabAddCourse);
+        tpTabs.getTabs().add(tabAddInstructor);
+        tpTabs.getTabs().add(tabBuildCourse);
+        
+        primaryPane.add(tpTabs, 0,0);
+        
+        tabAddStudent.setContent(addStudentPane);
+        tabAddCourse.setContent(addCoursePane);
+        tabAddInstructor.setContent(addInstructPane);
+        tabBuildCourse.setContent(buildCoursePane);
+        
+        addStudentPane.setPadding(new Insets(3,3,3,3));
+        addCoursePane.setPadding(new Insets(3,3,3,3));
+        addInstructPane.setPadding(new Insets(3,3,3,3));
+        buildCoursePane.setPadding(new Insets(3,3,3,3));
+        
+        // Add Student Section
+        addStudentPane.add(lblStudent, 0, 0);
+        
+        addStudentPane.add(lblNameStudent, 0, 1);
+        addStudentPane.add(txtStudentName, 1, 1);
+        
+        addStudentPane.add(lblYear, 0, 2);
+        addStudentPane.add(cmboYear, 1, 2);
+        
+        addStudentPane.add(lblMajor, 0, 3);
+        addStudentPane.add(txtStudentMajor, 1, 3);
+        
+        addStudentPane.add(lblGPA, 0, 4);
+        addStudentPane.add(txtStudentGPA, 1, 4);
+        
+        addStudentPane.add(lblEmailStudent, 0, 5);
+        addStudentPane.add(txtStudentEmail, 1, 5);
+        
+        addStudentPane.add(btnAddStudent, 1, 6);
+        
+        // Add Course Section
+        addCoursePane.add(lblCourse, 2, 0);
+        
+        addCoursePane.add(lblNameCourse, 2, 1);
+        addCoursePane.add(txtCourseName, 3, 1);
+        
+        addCoursePane.add(lblBuilding, 2, 2);
+        addCoursePane.add(cmboBuilding, 3, 2);
+        
+        addCoursePane.add(lblRoom, 2, 3);
+        addCoursePane.add(txtCourseRoom, 3, 3);
+        
+        addCoursePane.add(lblMaxCap, 2, 4);
+        addCoursePane.add(txtCourseMaxCap, 3, 4);
+        
+        addCoursePane.add(btnAddCourse, 3, 5);
+        
+        // Add Instructor Section
+        addInstructPane.add(lblInstructor, 4, 0);
+        
+        addInstructPane.add(lblNameInstructor, 4, 1);
+        addInstructPane.add(txtInstructName, 5, 1);
+        
+        addInstructPane.add(lblPrefix, 4, 2);
+        addInstructPane.add(cmboPrefix, 5, 2);
+        
+        addInstructPane.add(lblOffice, 4, 3);
+        addInstructPane.add(txtInstructOffice, 5, 3);
+        
+        addInstructPane.add(lblDept, 4, 4);
+        addInstructPane.add(txtInstructDept, 5, 4);
+        
+        addInstructPane.add(lblEmailInstructor, 4, 5);
+        addInstructPane.add(txtInstructEmail, 5, 5);
+        
+        addInstructPane.add(btnAddInstructor, 5, 6);
+        
+        // Add Build Section
+        buildCoursePane.add(lblBuild, 0, 7);
+        
+        buildCoursePane.add(lblAddStudent, 0, 8);
+        buildCoursePane.add(cmboAddStudent, 1, 8);
+        
+        buildCoursePane.add(lblToCourse, 0, 9);
+        buildCoursePane.add(cmboToCourse, 1, 9);
+        
+        buildCoursePane.add(chkNewInstruct, 0, 10);
+        
+        buildCoursePane.add(lblInstructIs, 0, 11);
+        buildCoursePane.add(cmboInstructIs, 1, 11);
+        
+        buildCoursePane.add(btnUpdateCourse, 1, 12);
+        
+        buildCoursePane.add(taDisplayArea, 2, 13);
         
         //Scene
+        Scene primaryScene = new Scene(primaryPane, 700, 300);
+        primaryStage.setTitle("Student Management System");
+        primaryStage.setScene(primaryScene);
+        primaryStage.show();
         
     }
 
