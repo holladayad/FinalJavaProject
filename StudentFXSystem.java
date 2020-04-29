@@ -38,10 +38,10 @@ public class StudentFXSystem extends Application {
     // Headers
     public Label lblStudent = new Label("Add Student:");
     public Label lblCourse = new Label("Add Course:");
-    public Label lblInstructor = new Label("Add Instrcutor:");
+    public Label lblInstructor = new Label("Add Instructor:");
     public Label lblBuild = new Label("Build a Course:");
     
-    // Student
+    // Add Student
     public Label lblNameStudent = new Label("Name:");
     public TextField txtStudentName = new TextField();
     
@@ -56,6 +56,8 @@ public class StudentFXSystem extends Application {
     public Label lblEmailStudent = new Label("Email:");
     public TextField txtStudentEmail = new TextField();
     
+    public Button btnAddStudent = new Button("Add Student ->");
+    
     // Add Course
     public Label lblNameCourse = new Label("Name:");
     public TextField txtCourseName = new TextField();
@@ -67,6 +69,8 @@ public class StudentFXSystem extends Application {
     
     public Label lblMaxCap = new Label("Max Capacity:");
     public TextField txtCourseMaxCap = new TextField();
+    
+    public Button btnAddCourse = new Button("Add Course ->");
     
     // Add Instructor
     public Label lblNameInstructor = new Label("Name:");
@@ -82,17 +86,17 @@ public class StudentFXSystem extends Application {
     
     public Label lblEmailInstructor = new Label("Email:");
     public TextField txtInstructEmail = new TextField();
+    
+    public Button btnAddInstructor = new Button("Add Instructor ->");
    
     // Build a Course
     public Label lblAddStudent = new Label("Add Student:");
     public Label lblToCourse = new Label("To Course:");
-    public Label lblInstructIs = new Label("Instrucotr is:");
-    
-    // BUTTONS
-    public Button btnAddStudent = new Button("Add Student ->");
-    public Button btnAddCourse = new Button("Add Course ->");
-    public Button btnAddInstructor = new Button("Add Instructor ->");
+    public Label lblInstructIs = new Label("Instructor is:");
+
     public Button btnUpdateCourse = new Button("Update Course ->");
+    
+    public CheckBox chkNewInstruct = new CheckBox("New Instructor?");
     
     // COMBOBOX - Listed in directions as pre-populated
     
@@ -108,137 +112,299 @@ public class StudentFXSystem extends Application {
     public String prefix[] = { "Dr.", "Ms.", "Mrs.", "Mr." };
     public ComboBox cmboPrefix = new ComboBox(FXCollections.observableArrayList(prefix));
     
-    // Building A Course
+    // ComboBox Build
     public ComboBox cmboAddStudent = new ComboBox(olStudents);
     public ComboBox cmboToCourse = new ComboBox(olCourses);
     public ComboBox cmboInstructIs = new ComboBox(olInstructors);
     
-    // Display Box
-    public TextArea taDisplayArea = new TextArea();
-    
-    // Check Box
-    public CheckBox chkNewInstruct = new CheckBox("New Instructor?");
+    // Display Box Creation
+    public TextArea taDisplayArea = new TextArea();    
         
     @Override
     public void start(Stage primaryStage) {
-        // All Controls
         
         // Pane
         GridPane primaryPane = new GridPane();
-        GridPane addStudentPane = new GridPane();
-        GridPane addCoursePane = new GridPane();
-        GridPane addInstructPane = new GridPane();
-        GridPane buildCoursePane = new GridPane();
         
-        TabPane tpTabs = new TabPane();
-        Tab tabAddStudent = new Tab("Add Student");
-        Tab tabAddCourse = new Tab("Add Course");
-        Tab tabAddInstructor = new Tab("Add Instructor");
-        Tab tabBuildCourse = new Tab("Build a Course");
-        
-        tpTabs.getTabs().add(tabAddStudent);
-        tpTabs.getTabs().add(tabAddCourse);
-        tpTabs.getTabs().add(tabAddInstructor);
-        tpTabs.getTabs().add(tabBuildCourse);
-        
-        primaryPane.add(tpTabs, 0,0);
-        
-        tabAddStudent.setContent(addStudentPane);
-        tabAddCourse.setContent(addCoursePane);
-        tabAddInstructor.setContent(addInstructPane);
-        tabBuildCourse.setContent(buildCoursePane);
-        
-        addStudentPane.setPadding(new Insets(3,3,3,3));
-        addCoursePane.setPadding(new Insets(3,3,3,3));
-        addInstructPane.setPadding(new Insets(3,3,3,3));
-        buildCoursePane.setPadding(new Insets(3,3,3,3));
+        primaryPane.setHgap(10);
+        primaryPane.setVgap(3);
+        primaryPane.setPadding(new Insets(3,3,3,3));
         
         // Add Student Section
-        addStudentPane.add(lblStudent, 0, 0);
+        primaryPane.add(lblStudent, 0, 0);
         
-        addStudentPane.add(lblNameStudent, 0, 1);
-        addStudentPane.add(txtStudentName, 1, 1);
+        primaryPane.add(lblNameStudent, 0, 1);
+        primaryPane.add(txtStudentName, 1, 1);
         
-        addStudentPane.add(lblYear, 0, 2);
-        addStudentPane.add(cmboYear, 1, 2);
+        primaryPane.add(lblYear, 0, 2);
+        primaryPane.add(cmboYear, 1, 2);
         
-        addStudentPane.add(lblMajor, 0, 3);
-        addStudentPane.add(txtStudentMajor, 1, 3);
+        primaryPane.add(lblMajor, 0, 3);
+        primaryPane.add(txtStudentMajor, 1, 3);
         
-        addStudentPane.add(lblGPA, 0, 4);
-        addStudentPane.add(txtStudentGPA, 1, 4);
+        primaryPane.add(lblGPA, 0, 4);
+        primaryPane.add(txtStudentGPA, 1, 4);
         
-        addStudentPane.add(lblEmailStudent, 0, 5);
-        addStudentPane.add(txtStudentEmail, 1, 5);
+        primaryPane.add(lblEmailStudent, 0, 5);
+        primaryPane.add(txtStudentEmail, 1, 5);
         
-        addStudentPane.add(btnAddStudent, 1, 6);
+        primaryPane.add(btnAddStudent, 1, 6);
         
         // Add Course Section
-        addCoursePane.add(lblCourse, 2, 0);
+        primaryPane.add(lblCourse, 0, 7);
         
-        addCoursePane.add(lblNameCourse, 2, 1);
-        addCoursePane.add(txtCourseName, 3, 1);
+        primaryPane.add(lblNameCourse, 0, 8);
+        primaryPane.add(txtCourseName, 1, 8);
         
-        addCoursePane.add(lblBuilding, 2, 2);
-        addCoursePane.add(cmboBuilding, 3, 2);
+        primaryPane.add(lblBuilding, 0, 9);
+        primaryPane.add(cmboBuilding, 1, 9);
         
-        addCoursePane.add(lblRoom, 2, 3);
-        addCoursePane.add(txtCourseRoom, 3, 3);
+        primaryPane.add(lblRoom, 0, 10);
+        primaryPane.add(txtCourseRoom, 1, 10);
         
-        addCoursePane.add(lblMaxCap, 2, 4);
-        addCoursePane.add(txtCourseMaxCap, 3, 4);
+        primaryPane.add(lblMaxCap, 0, 11);
+        primaryPane.add(txtCourseMaxCap, 1, 11);
         
-        addCoursePane.add(btnAddCourse, 3, 5);
+        primaryPane.add(btnAddCourse, 1, 12);
         
         // Add Instructor Section
-        addInstructPane.add(lblInstructor, 4, 0);
+        primaryPane.add(lblInstructor, 0, 13);
         
-        addInstructPane.add(lblNameInstructor, 4, 1);
-        addInstructPane.add(txtInstructName, 5, 1);
+        primaryPane.add(lblNameInstructor, 0, 14);
+        primaryPane.add(txtInstructName, 1, 14);
         
-        addInstructPane.add(lblPrefix, 4, 2);
-        addInstructPane.add(cmboPrefix, 5, 2);
+        primaryPane.add(lblPrefix, 0, 15);
+        primaryPane.add(cmboPrefix, 1, 15);
         
-        addInstructPane.add(lblOffice, 4, 3);
-        addInstructPane.add(txtInstructOffice, 5, 3);
+        primaryPane.add(lblOffice, 0, 16);
+        primaryPane.add(txtInstructOffice, 1, 16);
         
-        addInstructPane.add(lblDept, 4, 4);
-        addInstructPane.add(txtInstructDept, 5, 4);
+        primaryPane.add(lblDept, 0, 17);
+        primaryPane.add(txtInstructDept, 1, 17);
         
-        addInstructPane.add(lblEmailInstructor, 4, 5);
-        addInstructPane.add(txtInstructEmail, 5, 5);
+        primaryPane.add(lblEmailInstructor, 0, 18);
+        primaryPane.add(txtInstructEmail, 1, 18);
         
-        addInstructPane.add(btnAddInstructor, 5, 6);
+        primaryPane.add(btnAddInstructor, 1, 19);
         
-        // Add Build Section
-        buildCoursePane.add(lblBuild, 0, 7);
+        // Add Build Course Section
+        primaryPane.add(lblBuild, 2, 0);
         
-        buildCoursePane.add(lblAddStudent, 0, 8);
-        buildCoursePane.add(cmboAddStudent, 1, 8);
+        primaryPane.add(lblAddStudent, 2, 1);
+        primaryPane.add(cmboAddStudent, 3, 1);
         
-        buildCoursePane.add(lblToCourse, 0, 9);
-        buildCoursePane.add(cmboToCourse, 1, 9);
+        primaryPane.add(lblToCourse, 2, 2);
+        primaryPane.add(cmboToCourse, 3, 2);
         
-        buildCoursePane.add(chkNewInstruct, 0, 10);
+        primaryPane.add(chkNewInstruct, 2, 3);
         
-        buildCoursePane.add(lblInstructIs, 0, 11);
-        buildCoursePane.add(cmboInstructIs, 1, 11);
+        primaryPane.add(lblInstructIs, 2, 4);
+        primaryPane.add(cmboInstructIs, 3, 4);
         
-        buildCoursePane.add(btnUpdateCourse, 1, 12);
+        primaryPane.add(btnUpdateCourse, 3, 5);
         
-        buildCoursePane.add(taDisplayArea, 2, 13);
+        primaryPane.add(taDisplayArea, 2, 9, 12, 12);
         
         //Scene
-        Scene primaryScene = new Scene(primaryPane, 700, 300);
+        Scene primaryScene = new Scene(primaryPane, 750, 575);
         primaryStage.setTitle("Student Management System");
         primaryStage.setScene(primaryScene);
         primaryStage.show();
         
-    }
+        /*        
+        TO APPLICATION FILE:
+        
+        Method one: Non-static, update ComboBox Lists
+        Method Two: Non-static, populate output area based on selected course
+        */
+        
+        // Code for when Add Student Button Clicked
+        btnAddStudent.setOnAction(e -> 
+        {
+            // ***NEEDS: Error Check for Year Combo Box Being Empty***
+            
+            taDisplayArea.clear();
+            
+            if(txtStudentName.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Name!\n");
+            }
+            
+            if(txtStudentMajor.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Major!\n");
+            }
+            
+            if(txtStudentGPA.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Valid GPA!\n");
+            }
+            
+            if(!txtStudentGPA.getText().isEmpty())
+            {
+                // Convert GPA to a Double for error checking purposes
+                Double dblGPA = Double.valueOf(txtStudentGPA.getText());
+                
+                if(dblGPA < 0.0 || dblGPA > 5.0)
+                {
+                    taDisplayArea.appendText("Error! Please Input Valid GPA!\n");
+                }
+            }
+            
+            if(txtStudentEmail.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Valid Email!\n");
+            }
+            
+            if(!txtStudentEmail.getText().isEmpty())
+            {
+                boolean test;
+                test = false;
+                
+                String email = txtStudentEmail.getText();
 
-    // Method one: Non-static, update ComboBox Lists
-    
-    // Method Two: Non-static, populate output area based on selected course
+                for (int i = 0; i < email.length(); i++)
+                {
+                    if (email.charAt(i) == '@')
+                    {
+                        test = true;
+                    }
+                }
+                
+                if(test == false)
+                {
+                    taDisplayArea.appendText("Error! Please Input Valid Email!\n");
+                }
+            }
+            
+            // Convert the Year selection to the int equivalent
+            // Create new Student object
+            // Add Student to ArrayList
+            // Add Student to ListView
+            
+            // Clear all fields
+            txtStudentName.clear();
+            txtStudentMajor.clear();
+            txtStudentGPA.clear();
+            txtStudentEmail.clear();
+            cmboYear.getSelectionModel().clearSelection();
+                        
+        });
+        
+        // Code for when Add Course Button Clicked
+        btnAddCourse.setOnAction(e -> 
+        {
+            // ***NEEDS: Error Check for Building Combo Box Being Empty***
+            
+            taDisplayArea.clear();
+            
+            if(txtCourseName.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Name!\n");
+            }
+            
+            if(txtCourseRoom.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Valid Room Number!\n");
+            }
+            
+            if(txtCourseMaxCap.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Valid Capacity!\n");
+            }
+            
+            // Convert Course Cap to int
+            // Create new Course object
+            // Add Course to ArrayList
+            // Add Course to ListView
+            
+            // Clear all values
+            txtCourseName.clear();
+            txtCourseRoom.clear();
+            txtCourseMaxCap.clear();
+            cmboBuilding.getSelectionModel().clearSelection();
+        });
+        
+        // Code for when Add Instructor Button Clicked
+        btnAddInstructor.setOnAction(e -> 
+        {
+            // ***NEEDS: Error Check for Prefix Combo Box Being Empty***
+            taDisplayArea.clear();
+            
+            if(txtInstructName.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Name!\n");
+            }
+            
+            if(txtInstructOffice.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Valid Office Number!\n");
+            }
+            
+            if(txtInstructDept.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Valid Department!\n");
+            }
+            
+            if(txtInstructEmail.getText().isEmpty())
+            {
+                taDisplayArea.appendText("Error! Please Input Valid Email!");
+            }
+            
+            if(!txtInstructEmail.getText().isEmpty())
+            {
+                boolean test;
+                test = false;
+                
+                String email = txtInstructEmail.getText();
+
+                for (int i = 0; i < email.length(); i++)
+                {
+                    if (email.charAt(i) == '@')
+                    {
+                        test = true;
+                    }
+                }
+                
+                if(test = false)
+                {
+                    taDisplayArea.appendText("Error! Please Input Valid Email!\n");
+                }
+                
+            }
+            
+            // Create new Instruct object
+            // Add Instruct to ArrayList
+            // Add Instruct to ListView
+            
+            // Clear all values
+            txtInstructName.clear();
+            txtInstructOffice.clear();
+            txtInstructDept.clear();
+            txtInstructEmail.clear();
+            cmboPrefix.getSelectionModel().clearSelection();
+        });
+        
+        // Code for when Update Course Button Clicked
+        btnUpdateCourse.setOnAction(e -> 
+        {
+            taDisplayArea.clear();
+            /*
+            -> Need to be able to add student to course regardless of "New Instructor"
+            checkbox setting without changing any other data.
+            -> Inversely, need to add instructor w/out adding a student
+            HINT: if ComboBox is empty, index = -1
+            -> disable ComboBox unless checked will require if/else statements
+            */
+            
+            //Clear all fields
+            cmboAddStudent.getSelectionModel().clearSelection();
+            cmboToCourse.getSelectionModel().clearSelection();
+            cmboInstructIs.getSelectionModel().clearSelection();
+            chkNewInstruct.setSelected(false);
+        });
+        
+    }
 
     public static void main(String[] args) {
         launch(args);
