@@ -366,7 +366,7 @@ public class StudentFXSystem extends Application {
                     }
                 }
                 
-                if(test = false)
+                if(test == false)
                 {
                     taDisplayArea.appendText("Error! Please Input Valid Email!\n");
                 }
