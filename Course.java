@@ -19,6 +19,8 @@ public class Course
    private ArrayList<Student> enrolledStudents;
    private Instructor courseInstructor;
       
+   //comment
+   
     // constructor 
     public Course(String name, String building, String room, int capacity)
     {
