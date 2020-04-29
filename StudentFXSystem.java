@@ -220,14 +220,18 @@ public class StudentFXSystem extends Application {
         
         // Code for when Add Student Button Clicked
         btnAddStudent.setOnAction(e -> 
-        {
-            // ***NEEDS: Error Check for Year Combo Box Being Empty***
-            
+        {            
             taDisplayArea.clear();
             
             if(txtStudentName.getText().isEmpty())
             {
                 taDisplayArea.appendText("Error! Please Input Name!\n");
+            }
+            
+            // Error Check for Year Combo Box Being Empty
+            if (cmboYear.getValue()== null)
+            {
+                taDisplayArea.appendText("Error! Please select Year!\n");
             }
             
             if(txtStudentMajor.getText().isEmpty())
@@ -294,7 +298,7 @@ public class StudentFXSystem extends Application {
         // Code for when Add Course Button Clicked
         btnAddCourse.setOnAction(e -> 
         {
-            // ***NEEDS: Error Check for Building Combo Box Being Empty***
+            
             
             taDisplayArea.clear();
             
@@ -302,7 +306,11 @@ public class StudentFXSystem extends Application {
             {
                 taDisplayArea.appendText("Error! Please Input Name!\n");
             }
-            
+            //Error Check for Building Combo Box Being Empty
+            if (cmboBuilding.getValue()== null)
+            {
+                taDisplayArea.appendText("Error! Please select a Building!\n");
+            }
             if(txtCourseRoom.getText().isEmpty())
             {
                 taDisplayArea.appendText("Error! Please Input Valid Room Number!\n");
@@ -328,12 +336,18 @@ public class StudentFXSystem extends Application {
         // Code for when Add Instructor Button Clicked
         btnAddInstructor.setOnAction(e -> 
         {
-            // ***NEEDS: Error Check for Prefix Combo Box Being Empty***
+            
             taDisplayArea.clear();
             
             if(txtInstructName.getText().isEmpty())
             {
                 taDisplayArea.appendText("Error! Please Input Name!\n");
+            }
+            
+            // Error Check for Prefix Combo Box Being Empty
+            if (cmboPrefix.getValue()== null)
+            {
+                taDisplayArea.appendText("Error! Please select a Prefix!\n");
             }
             
             if(txtInstructOffice.getText().isEmpty())
