@@ -62,6 +62,35 @@ public class Student {
         nextStudentID++;
     }
     
+    public Student(String name, String year, String major, double GPA, String email){
+        
+        String first; //first name 
+        String last; //last name
+        int end = 0; //end of first name
+        int beg; //beg of last name
+        
+        //Find the first name index values
+        for (int count = 0; count < name.length(); count++){
+            if (name.charAt(count) == ' '){ //if the current character is a space, record the index
+                end = count;
+            }
+        }      
+        beg = end + 1; //record the index of the beginning of the last name
+                
+        first = name.substring(0, end);
+        last = name.substring(beg, name.length());
+            
+        this.firstName = first;
+        this.lastName = last;
+        this.studentYear = year;
+        this.studentMajor = major;
+        this.GPA = GPA;
+        this.studentEmail = email;
+        this.studentID = nextStudentID;
+            
+        nextStudentID++;
+    }
+    
     public void setGPA(double GPA){
         
         this.GPA = GPA;

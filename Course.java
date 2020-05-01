@@ -93,6 +93,11 @@ public class Course
        return toString;
    }
    
+   public String getName()
+   {
+       return this.courseName;
+   }
+   
    public String getRoster()
    {
        if(this.enrolledStudents.isEmpty())

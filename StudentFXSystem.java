@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 // ComboBoxes
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventType;
 import javafx.geometry.*;
 
 public class StudentFXSystem extends Application {
@@ -198,6 +199,12 @@ public class StudentFXSystem extends Application {
         
         primaryPane.add(chkNewInstruct, 2, 3);
         
+        cmboInstructIs.setDisable(true);
+        
+        chkNewInstruct.setOnAction(e ->{
+            cmboInstructIs.setDisable(!chkNewInstruct.isSelected());
+        });
+        
         primaryPane.add(lblInstructIs, 2, 4);
         primaryPane.add(cmboInstructIs, 3, 4);
         
@@ -222,25 +229,29 @@ public class StudentFXSystem extends Application {
         btnAddStudent.setOnAction(e -> 
         {            
             taDisplayArea.clear();
-            
+            boolean failure = false;
             if(txtStudentName.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Name!\n");
             }
             
             // Error Check for Year Combo Box Being Empty
             if (cmboYear.getValue()== null)
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please select Year!\n");
             }
             
             if(txtStudentMajor.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Major!\n");
             }
             
             if(txtStudentGPA.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Valid GPA!\n");
             }
             
@@ -251,12 +262,14 @@ public class StudentFXSystem extends Application {
                 
                 if(dblGPA < 0.0 || dblGPA > 5.0)
                 {
+                    failure = true;
                     taDisplayArea.appendText("Error! Please Input Valid GPA!\n");
                 }
             }
             
             if(txtStudentEmail.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Valid Email!\n");
             }
             
@@ -277,14 +290,23 @@ public class StudentFXSystem extends Application {
                 
                 if(test == false)
                 {
+                    failure = true;
                     taDisplayArea.appendText("Error! Please Input Valid Email!\n");
                 }
             }
             
             // Convert the Year selection to the int equivalent
-            // Create new Student object
-            // Add Student to ArrayList
-            // Add Student to ListView
+            
+            if (!failure){
+                // Create new Student object
+                Double dblGPA = Double.valueOf(txtStudentGPA.getText());
+                Student newStudent = new Student(txtStudentName.getText(), cmboYear.getValue().toString(), txtStudentMajor.getText(), 
+                dblGPA, txtStudentEmail.getText());
+                // Add Student to ArrayList
+                studentArray.add(newStudent);
+                // Add Student to ListView
+                olStudents.add(newStudent.getName());
+            }
             
             // Clear all fields
             txtStudentName.clear();
@@ -301,31 +323,42 @@ public class StudentFXSystem extends Application {
             
             
             taDisplayArea.clear();
-            
+            boolean failure = false;
             if(txtCourseName.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Name!\n");
             }
             //Error Check for Building Combo Box Being Empty
             if (cmboBuilding.getValue()== null)
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please select a Building!\n");
             }
             if(txtCourseRoom.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Valid Room Number!\n");
             }
             
             if(txtCourseMaxCap.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Valid Capacity!\n");
             }
             
-            // Convert Course Cap to int
-            // Create new Course object
-            // Add Course to ArrayList
-            // Add Course to ListView
-            
+            if (!failure){
+                                
+                // Convert Course Cap to int
+                int cap = Integer.valueOf(txtCourseMaxCap.getText());
+                // Create new Course object
+                Course newCourse = new Course(txtCourseName.getText(), cmboBuilding.getValue().toString(),
+                txtCourseRoom.getText(), cap);
+                // Add Course to ArrayList
+                courseArray.add(newCourse);
+                // Add Course to ListView
+                olCourses.add(newCourse.getName());
+            }
             // Clear all values
             txtCourseName.clear();
             txtCourseRoom.clear();
@@ -338,30 +371,35 @@ public class StudentFXSystem extends Application {
         {
             
             taDisplayArea.clear();
-            
+            boolean failure = false;
             if(txtInstructName.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Name!\n");
             }
             
             // Error Check for Prefix Combo Box Being Empty
             if (cmboPrefix.getValue()== null)
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please select a Prefix!\n");
             }
             
             if(txtInstructOffice.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Valid Office Number!\n");
             }
             
             if(txtInstructDept.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Valid Department!\n");
             }
             
             if(txtInstructEmail.getText().isEmpty())
             {
+                failure = true;
                 taDisplayArea.appendText("Error! Please Input Valid Email!");
             }
             
@@ -382,15 +420,22 @@ public class StudentFXSystem extends Application {
                 
                 if(test == false)
                 {
+                    failure = true;
                     taDisplayArea.appendText("Error! Please Input Valid Email!\n");
                 }
                 
             }
-            
+            if (!failure){
             // Create new Instruct object
-            // Add Instruct to ArrayList
-            // Add Instruct to ListView
+            //public Instructor(String name, String prefix, String office, String dept, String email)
+            Instructor newInstructor = new Instructor(txtInstructName.getText(), cmboPrefix.getValue().toString(),
+            txtInstructOffice.getText(),txtInstructDept.getText(), txtInstructEmail.getText());
             
+            // Add Instruct to ArrayList
+            instructorArray.add(newInstructor);
+            // Add Instruct to ListView
+            olInstructors.add(newInstructor.getName());
+            }
             // Clear all values
             txtInstructName.clear();
             txtInstructOffice.clear();
@@ -410,12 +455,56 @@ public class StudentFXSystem extends Application {
             HINT: if ComboBox is empty, index = -1
             -> disable ComboBox unless checked will require if/else statements
             */
+            boolean failure = false;
+            boolean isStudent = false;
             
+            if (cmboToCourse.getValue() == null)
+                {
+                    failure = true;
+                    taDisplayArea.appendText("Error! Please select Course!\n");
+                }
+            if (cmboAddStudent.getValue() != null)
+            {
+                isStudent = true;
+            }
+            if (chkNewInstruct.isSelected())
+            {
+                 if (cmboInstructIs.getValue() == null)
+                {
+                    failure = true;
+                    taDisplayArea.appendText("Error! Please select Instructor!\n");
+                }
+            }
+            else
+            {
+                if (!isStudent)
+                {
+                    failure = true;
+                    taDisplayArea.appendText("Error! Please select Student!\n");
+                }
+            }
+            if (!failure)
+            {
+                Course currentCourse = courseArray.get(cmboToCourse.getSelectionModel().getSelectedIndex());
+                if (chkNewInstruct.isSelected())
+                {
+                   Instructor currentInstructor = instructorArray.get(cmboInstructIs.getSelectionModel().getSelectedIndex());
+                   currentCourse.assignInstructor(currentInstructor);
+                }
+                if (isStudent)
+                {
+                    Student currentStudent = studentArray.get(cmboAddStudent.getSelectionModel().getSelectedIndex());
+                    currentCourse.enrollStudent(currentStudent);
+                }
+                taDisplayArea.appendText(currentCourse.toString()+"\n");
+                taDisplayArea.appendText(currentCourse.getRoster()+"\n");
+            }
             //Clear all fields
             cmboAddStudent.getSelectionModel().clearSelection();
             cmboToCourse.getSelectionModel().clearSelection();
             cmboInstructIs.getSelectionModel().clearSelection();
             chkNewInstruct.setSelected(false);
+            cmboInstructIs.setDisable(true);
         });
         
     }

@@ -58,6 +58,10 @@ public class Instructor
     {
         return this.prefix;
     }
+    public String getName()
+    {
+        return this.prefix + " " + this.name;
+    }
     
     @Override
     public String toString() //Amber Holladay
