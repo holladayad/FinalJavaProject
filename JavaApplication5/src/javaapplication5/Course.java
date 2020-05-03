@@ -117,4 +117,8 @@ public class Course
        }
        return roster;
    }
+   
+   public ArrayList getStudentArray(){
+       return this.enrolledStudents;
+   }
 }

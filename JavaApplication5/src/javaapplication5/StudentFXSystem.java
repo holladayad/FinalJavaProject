@@ -557,7 +557,19 @@ public class StudentFXSystem extends Application {
     public void stop(){
         //Saves everything to the database
         //runs automatically when the program closes
-        for 
+        
+        ArrayList courseStudent;
+        
+        for (int i = 0; i < courseArray.size(); i++){
+            
+            Course currentCourse = courseArray.get(i);
+            courseStudent = currentCourse.getStudentArray();
+            
+            for (int j = 0; j < courseStudent.size(); j++){
+                
+                
+            }
+        }
        
     }
     
@@ -582,7 +594,8 @@ public class StudentFXSystem extends Application {
             //handling the results
             stmt = conn.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_READ_ONLY);
             
-            //
+            //send the query to oracle
+            rs = stmt.executeQuery(query);
             
         }
         catch(SQLException e){
