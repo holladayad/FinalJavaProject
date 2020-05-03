@@ -417,16 +417,12 @@ public class StudentFXSystem extends Application {
                 }
                 
             }
-            if (!failure){
-            // Create new Instruct object
-            //public Instructor(String name, String prefix, String office, String dept, String email)
-            Instructor newInstructor = new Instructor(txtInstructName.getText(), cmboPrefix.getValue().toString(),
-            txtInstructOffice.getText(),txtInstructDept.getText(), txtInstructEmail.getText());
-            
-            // Add Instruct to ArrayList
-            instructorArray.add(newInstructor);
-            // Add Instruct to ListView
-            olInstructors.add(newInstructor.getName());
+            if (!failure)
+            {
+                Instructor newInstructor = new Instructor(txtInstructName.getText(), cmboPrefix.getValue().toString(),
+                txtInstructOffice.getText(),txtInstructDept.getText(), txtInstructEmail.getText());
+                instructorArray.add(newInstructor);
+                olInstructors.add(newInstructor.getName());
             }
             // Clear all values
             txtInstructName.clear();
