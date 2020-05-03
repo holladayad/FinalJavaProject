@@ -4,7 +4,7 @@ Date: Apr 28, 2020
 Assignment: Group Project Part 2
 Purpose: JavaFX Version of the Student Management System
  */
-package FinalProject.FinalJavaProject;
+package FinalJavaProject;
 
 // ArrayLists
 import java.util.*;
@@ -58,7 +58,7 @@ public class StudentFXSystem extends Application {
     public TextField txtStudentEmail = new TextField();
     
     public Button btnAddStudent = new Button("Add Student ->");
-    
+
     // Add Course
     public Label lblNameCourse = new Label("Name:");
     public TextField txtCourseName = new TextField();
@@ -91,14 +91,19 @@ public class StudentFXSystem extends Application {
     public Button btnAddInstructor = new Button("Add Instructor ->");
    
     // Build a Course
-    public Label lblAddStudent = new Label("Add Student:");
-    public Label lblToCourse = new Label("To Course:");
+   // public Label lblAddStudent = new Label("Add Student");
+  
+  
+    public CheckBox chkAddStudent = new CheckBox("Add Student");
+    public CheckBox chkRemoveStudent = new CheckBox("Remove Student");
+    public Label lblChooseStudent = new Label("Choose Student: ");       
+    public Label lblToCourse = new Label("Choose Course:");
     public Label lblInstructIs = new Label("Instructor is:");
 
-    public Button btnUpdateCourse = new Button("Update Course ->");
+    public Button btnUpdateCourse = new Button("Save Changes ");
     
     public CheckBox chkNewInstruct = new CheckBox("New Instructor?");
-    
+      
     // COMBOBOX - Listed in directions as pre-populated
     
     // Years
@@ -114,7 +119,7 @@ public class StudentFXSystem extends Application {
     public ComboBox cmboPrefix = new ComboBox(FXCollections.observableArrayList(prefix));
     
     // ComboBox Build
-    public ComboBox cmboAddStudent = new ComboBox(olStudents);
+    public ComboBox cmboChooseStudent = new ComboBox(olStudents);
     public ComboBox cmboToCourse = new ComboBox(olCourses);
     public ComboBox cmboInstructIs = new ComboBox(olInstructors);
     
@@ -190,25 +195,44 @@ public class StudentFXSystem extends Application {
         
         // Add Build Course Section
         primaryPane.add(lblBuild, 2, 0);
+
+        primaryPane.add(chkAddStudent, 2, 1);
+        primaryPane.add(chkRemoveStudent, 3, 1);
         
-        primaryPane.add(lblAddStudent, 2, 1);
-        primaryPane.add(cmboAddStudent, 3, 1);
         
-        primaryPane.add(lblToCourse, 2, 2);
-        primaryPane.add(cmboToCourse, 3, 2);
+        // Disabling combo box by default, so that user will add a student first
+        cmboChooseStudent.setDisable(true);
+
+        // Disabling check box remove student if add student check box is selected
+        chkAddStudent.setOnAction(e ->{
+            cmboChooseStudent.setDisable(!chkAddStudent.isSelected());
+            chkRemoveStudent.setDisable(chkAddStudent.isSelected());
+                                       });
         
-        primaryPane.add(chkNewInstruct, 2, 3);
+        // Doing the inverse 
+        chkRemoveStudent.setOnAction(e ->{
+            cmboChooseStudent.setDisable(!chkRemoveStudent.isSelected());
+            chkAddStudent.setDisable(chkRemoveStudent.isSelected());
+                                       });
+
+        primaryPane.add(lblChooseStudent, 2, 2);
+        primaryPane.add(cmboChooseStudent, 3, 2);
+
+        primaryPane.add(lblToCourse, 2, 3);
+        primaryPane.add(cmboToCourse, 3, 3);
         
+        primaryPane.add(chkNewInstruct, 2, 4);
+      
         cmboInstructIs.setDisable(true);
-        
+       
         chkNewInstruct.setOnAction(e ->{
             cmboInstructIs.setDisable(!chkNewInstruct.isSelected());
-        });
+             });
+  
+        primaryPane.add(lblInstructIs, 2, 5);
+        primaryPane.add(cmboInstructIs, 3, 5);
         
-        primaryPane.add(lblInstructIs, 2, 4);
-        primaryPane.add(cmboInstructIs, 3, 4);
-        
-        primaryPane.add(btnUpdateCourse, 3, 5);
+        primaryPane.add(btnUpdateCourse, 3, 6);
         
         primaryPane.add(taDisplayArea, 2, 9, 12, 12);
         
@@ -236,6 +260,7 @@ public class StudentFXSystem extends Application {
                 taDisplayArea.appendText("Error! Please Input Name!\n");
             }
             
+                        
             // Error Check for Year Combo Box Being Empty
             if (cmboYear.getValue()== null)
             {
@@ -297,13 +322,14 @@ public class StudentFXSystem extends Application {
             
             // Convert the Year selection to the int equivalent
             
-            if (!failure)
-            {
+            if (!failure){
                 // Create new Student object
                 Double dblGPA = Double.valueOf(txtStudentGPA.getText());
                 Student newStudent = new Student(txtStudentName.getText(), cmboYear.getValue().toString(), txtStudentMajor.getText(), 
                 dblGPA, txtStudentEmail.getText());
+                // Add Student to ArrayList
                 studentArray.add(newStudent);
+                // Add Student to ListView
                 olStudents.add(newStudent.getName());
             }
             
@@ -319,6 +345,8 @@ public class StudentFXSystem extends Application {
         // Code for when Add Course Button Clicked
         btnAddCourse.setOnAction(e -> 
         {
+            
+            
             taDisplayArea.clear();
             boolean failure = false;
             if(txtCourseName.getText().isEmpty())
@@ -344,15 +372,18 @@ public class StudentFXSystem extends Application {
                 taDisplayArea.appendText("Error! Please Input Valid Capacity!\n");
             }
             
-            if (!failure)
-            {          
+            if (!failure){
+                                
+                // Convert Course Cap to int
                 int cap = Integer.valueOf(txtCourseMaxCap.getText());
+                // Create new Course object
                 Course newCourse = new Course(txtCourseName.getText(), cmboBuilding.getValue().toString(),
                 txtCourseRoom.getText(), cap);
+                // Add Course to ArrayList
                 courseArray.add(newCourse);
+                // Add Course to ListView
                 olCourses.add(newCourse.getName());
             }
-            
             // Clear all values
             txtCourseName.clear();
             txtCourseRoom.clear();
@@ -362,7 +393,8 @@ public class StudentFXSystem extends Application {
         
         // Code for when Add Instructor Button Clicked
         btnAddInstructor.setOnAction(e -> 
-        {           
+        {
+            
             taDisplayArea.clear();
             boolean failure = false;
             if(txtInstructName.getText().isEmpty())
@@ -371,6 +403,7 @@ public class StudentFXSystem extends Application {
                 taDisplayArea.appendText("Error! Please Input Name!\n");
             }
             
+            // Error Check for Prefix Combo Box Being Empty
             if (cmboPrefix.getValue()== null)
             {
                 failure = true;
@@ -417,12 +450,16 @@ public class StudentFXSystem extends Application {
                 }
                 
             }
-            if (!failure)
-            {
-                Instructor newInstructor = new Instructor(txtInstructName.getText(), cmboPrefix.getValue().toString(),
-                txtInstructOffice.getText(),txtInstructDept.getText(), txtInstructEmail.getText());
-                instructorArray.add(newInstructor);
-                olInstructors.add(newInstructor.getName());
+            if (!failure){
+            // Create new Instruct object
+            //public Instructor(String name, String prefix, String office, String dept, String email)
+            Instructor newInstructor = new Instructor(txtInstructName.getText(), cmboPrefix.getValue().toString(),
+            txtInstructOffice.getText(),txtInstructDept.getText(), txtInstructEmail.getText());
+            
+            // Add Instruct to ArrayList
+            instructorArray.add(newInstructor);
+            // Add Instruct to ListView
+            olInstructors.add(newInstructor.getName());
             }
             // Clear all values
             txtInstructName.clear();
@@ -436,15 +473,33 @@ public class StudentFXSystem extends Application {
         btnUpdateCourse.setOnAction(e -> 
         {
             taDisplayArea.clear();
+            /*
+            -> Need to be able to add student to course regardless of "New Instructor"
+            checkbox setting without changing any other data.
+            -> Inversely, need to add instructor w/out adding a student
+            HINT: if ComboBox is empty, index = -1
+            -> disable ComboBox unless checked will require if/else statements
+            */
             boolean failure = false;
             boolean isStudent = false;
-            
+           
+// REMOVAL OF STUDENT
+            if (chkRemoveStudent.isSelected())
+            {
+                if(cmboChooseStudent.getValue() != null)
+                    {
+                  //  Course currentCourse = courseArray.get(cmboToCourse.getSelectionModel().getSelectedIndex());
+                    //Student currentStudent = studentArray.get(cmboChooseStudent.getSelectionModel().getSelectedIndex());
+                    //currentCourse.removeStudent(currentStudent.getStudentID());
+                    }
+            }
+// Help me 
             if (cmboToCourse.getValue() == null)
-                {
+            {
                     failure = true;
                     taDisplayArea.appendText("Error! Please select Course!\n");
-                }
-            if (cmboAddStudent.getValue() != null)
+            }
+            if (cmboChooseStudent.getValue() != null)
             {
                 isStudent = true;
             }
@@ -464,6 +519,7 @@ public class StudentFXSystem extends Application {
                     taDisplayArea.appendText("Error! Please select Student!\n");
                 }
             }
+            
             if (!failure)
             {
                 Course currentCourse = courseArray.get(cmboToCourse.getSelectionModel().getSelectedIndex());
@@ -474,14 +530,14 @@ public class StudentFXSystem extends Application {
                 }
                 if (isStudent)
                 {
-                    Student currentStudent = studentArray.get(cmboAddStudent.getSelectionModel().getSelectedIndex());
+                    Student currentStudent = studentArray.get(cmboChooseStudent.getSelectionModel().getSelectedIndex());
                     currentCourse.enrollStudent(currentStudent);
                 }
                 taDisplayArea.appendText(currentCourse.toString()+"\n");
                 taDisplayArea.appendText(currentCourse.getRoster()+"\n");
             }
             //Clear all fields
-            cmboAddStudent.getSelectionModel().clearSelection();
+            cmboChooseStudent.getSelectionModel().clearSelection();
             cmboToCourse.getSelectionModel().clearSelection();
             cmboInstructIs.getSelectionModel().clearSelection();
             chkNewInstruct.setSelected(false);
