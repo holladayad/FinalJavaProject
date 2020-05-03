@@ -446,13 +446,6 @@ public class StudentFXSystem extends Application {
         btnUpdateCourse.setOnAction(e -> 
         {
             taDisplayArea.clear();
-            /*
-            -> Need to be able to add student to course regardless of "New Instructor"
-            checkbox setting without changing any other data.
-            -> Inversely, need to add instructor w/out adding a student
-            HINT: if ComboBox is empty, index = -1
-            -> disable ComboBox unless checked will require if/else statements
-            */
             boolean failure = false;
             boolean isStudent = false;
             
