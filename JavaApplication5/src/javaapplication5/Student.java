@@ -4,7 +4,7 @@ Date: Apr 24, 2020
 Assignment: Group Project Part 1
 Purpose: Student Class to create new Student Objects for the overall program.
  */
-package FinalProject.FinalJavaProject;
+package javaapplication5;
 
 import java.util.*;
 

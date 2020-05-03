@@ -4,7 +4,7 @@ Date: Apr 21, 2020
 Assignment: Group Project Part 1
 Purpose: To run the Student Management System
  */
-package FinalProject.FinalJavaProject;
+package javaapplication5;
 
 import java.util.*;
 

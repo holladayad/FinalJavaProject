@@ -5,7 +5,7 @@ Assignment: Group Project Part 1
 Purpose: Course Class to create new Course objects for overall program
  */
 
-package FinalProject.FinalJavaProject;
+package javaapplication5;
 import java.util.*;
 
 public class Course 

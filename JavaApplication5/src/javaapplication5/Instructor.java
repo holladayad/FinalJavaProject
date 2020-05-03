@@ -4,7 +4,7 @@ Date: Apr 21, 2020
 Assignment: Group Project Part 1
 Purpose: Instructor Class to create new Instructor Objects for the overall program.
  */
-package FinalProject.FinalJavaProject;
+package javaapplication5;
 
 
 public class Instructor
