@@ -546,6 +546,11 @@ public class StudentFXSystem extends Application {
         
     }
 
+    @Override
+    public void stop(){
+        //Saves everything to the database
+        //runs automatically when the program closes
+    }
     public static void main(String[] args) {
         launch(args);
     }
