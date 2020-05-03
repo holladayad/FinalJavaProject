@@ -6,7 +6,9 @@ Purpose: JavaFX Version of the Student Management System
  */
 package javaapplication5;
 
-// ArrayLists
+// ArrayLists & Database Connection
+import java.sql.*;
+import oracle.jdbc.pool.*;
 import java.util.*;
 
 // FX
@@ -126,7 +128,12 @@ public class StudentFXSystem extends Application {
     public ComboBox cmboInstructIs = new ComboBox(olInstructors);
     
     // Display Box Creation
-    public TextArea taDisplayArea = new TextArea();    
+    public TextArea taDisplayArea = new TextArea();  
+    
+    //Database Connection
+    public Connection conn;
+    public Statement stmt;
+    public ResultSet rs;
         
     @Override
     public void start(Stage primaryStage) {
@@ -550,7 +557,42 @@ public class StudentFXSystem extends Application {
     public void stop(){
         //Saves everything to the database
         //runs automatically when the program closes
+        for 
+       
     }
+    
+    public void sendCommand(String query){
+        String url = "jdbc:oracle:thin:@localhost:1521:XE";
+        String user = "javauser";
+        String pass = "javapass";
+        
+        OracleDataSource ds;
+        
+        try{
+           
+            //create the connection using the object from Oracle
+            ds = new OracleDataSource();
+            
+            //set the connection url in the object
+            ds.setURL(url);
+            
+            //attempt to connect with specified username and login, default as "javauser" and "javapass"
+            conn = ds.getConnection(user, pass);
+            
+            //handling the results
+            stmt = conn.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_READ_ONLY);
+            
+            //
+            
+        }
+        catch(SQLException e){
+            
+            System.out.println(e.toString());
+            
+        }
+        
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
