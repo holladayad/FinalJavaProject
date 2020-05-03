@@ -4,7 +4,7 @@ Date: Apr 28, 2020
 Assignment: Group Project Part 2
 Purpose: JavaFX Version of the Student Management System
  */
-package FinalJavaProject;
+package FinalProject.FinalJavaProject;
 
 // ArrayLists
 import java.util.*;
@@ -94,8 +94,10 @@ public class StudentFXSystem extends Application {
    // public Label lblAddStudent = new Label("Add Student");
   
   
-    public CheckBox chkAddStudent = new CheckBox("Add Student");
-    public CheckBox chkRemoveStudent = new CheckBox("Remove Student");
+   // public CheckBox chkAddStudent = new CheckBox("Add Student");
+    //public CheckBox chkRemoveStudent = new CheckBox("Remove Student");
+    public RadioButton rbAddStudent = new RadioButton();
+    public RadioButton rbRemoveStudent = new RadioButton();
     public Label lblChooseStudent = new Label("Choose Student: ");       
     public Label lblToCourse = new Label("Choose Course:");
     public Label lblInstructIs = new Label("Instructor is:");
@@ -196,23 +198,26 @@ public class StudentFXSystem extends Application {
         // Add Build Course Section
         primaryPane.add(lblBuild, 2, 0);
 
-        primaryPane.add(chkAddStudent, 2, 1);
-        primaryPane.add(chkRemoveStudent, 3, 1);
+        rbAddStudent.setText("Add Student");
+        rbRemoveStudent.setText("Remove Student");
+        primaryPane.add(rbAddStudent, 2, 1);
+        primaryPane.add(rbRemoveStudent, 3, 1);
         
         
         // Disabling combo box by default, so that user will add a student first
         cmboChooseStudent.setDisable(true);
 
         // Disabling check box remove student if add student check box is selected
-        chkAddStudent.setOnAction(e ->{
-            cmboChooseStudent.setDisable(!chkAddStudent.isSelected());
-            chkRemoveStudent.setDisable(chkAddStudent.isSelected());
-                                       });
+        rbAddStudent.setOnAction(e ->
+        {
+            cmboChooseStudent.setDisable(!rbAddStudent.isSelected());
+            rbRemoveStudent.setDisable(rbAddStudent.isSelected());
+        });
         
         // Doing the inverse 
-        chkRemoveStudent.setOnAction(e ->{
-            cmboChooseStudent.setDisable(!chkRemoveStudent.isSelected());
-            chkAddStudent.setDisable(chkRemoveStudent.isSelected());
+        rbRemoveStudent.setOnAction(e ->{
+            cmboChooseStudent.setDisable(!rbRemoveStudent.isSelected());
+            rbAddStudent.setDisable(rbRemoveStudent.isSelected());
                                        });
 
         primaryPane.add(lblChooseStudent, 2, 2);
@@ -483,17 +488,6 @@ public class StudentFXSystem extends Application {
             boolean failure = false;
             boolean isStudent = false;
            
-// REMOVAL OF STUDENT
-            if (chkRemoveStudent.isSelected())
-            {
-                if(cmboChooseStudent.getValue() != null)
-                    {
-                  //  Course currentCourse = courseArray.get(cmboToCourse.getSelectionModel().getSelectedIndex());
-                    //Student currentStudent = studentArray.get(cmboChooseStudent.getSelectionModel().getSelectedIndex());
-                    //currentCourse.removeStudent(currentStudent.getStudentID());
-                    }
-            }
-// Help me 
             if (cmboToCourse.getValue() == null)
             {
                     failure = true;
@@ -528,11 +522,17 @@ public class StudentFXSystem extends Application {
                    Instructor currentInstructor = instructorArray.get(cmboInstructIs.getSelectionModel().getSelectedIndex());
                    currentCourse.assignInstructor(currentInstructor);
                 }
-                if (isStudent)
+                if (rbAddStudent.isSelected())
                 {
                     Student currentStudent = studentArray.get(cmboChooseStudent.getSelectionModel().getSelectedIndex());
                     currentCourse.enrollStudent(currentStudent);
                 }
+                if (rbRemoveStudent.isSelected())
+                {
+                    Student currentStudent = studentArray.get(cmboChooseStudent.getSelectionModel().getSelectedIndex());
+                    currentCourse.removeStudent(currentStudent.getStudentID());
+                }
+
                 taDisplayArea.appendText(currentCourse.toString()+"\n");
                 taDisplayArea.appendText(currentCourse.getRoster()+"\n");
             }
