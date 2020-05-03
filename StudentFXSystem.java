@@ -320,8 +320,6 @@ public class StudentFXSystem extends Application {
         // Code for when Add Course Button Clicked
         btnAddCourse.setOnAction(e -> 
         {
-            
-            
             taDisplayArea.clear();
             boolean failure = false;
             if(txtCourseName.getText().isEmpty())
