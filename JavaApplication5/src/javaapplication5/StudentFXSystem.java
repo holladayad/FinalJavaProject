@@ -562,6 +562,7 @@ public class StudentFXSystem extends Application {
         Course currentCourse;
         Student currentStudent;
         
+        //Insert statements for studentenrollment table
         for (int i = 0; i < courseArray.size(); i++){
             
             currentCourse = courseArray.get(i);
@@ -579,6 +580,12 @@ public class StudentFXSystem extends Application {
                 
             }
         }
+        
+        //insert statements for Student table
+        
+        //insert statements for course table
+        
+        //insert statements for instructor table
        
     }
     
