@@ -297,14 +297,13 @@ public class StudentFXSystem extends Application {
             
             // Convert the Year selection to the int equivalent
             
-            if (!failure){
+            if (!failure)
+            {
                 // Create new Student object
                 Double dblGPA = Double.valueOf(txtStudentGPA.getText());
                 Student newStudent = new Student(txtStudentName.getText(), cmboYear.getValue().toString(), txtStudentMajor.getText(), 
                 dblGPA, txtStudentEmail.getText());
-                // Add Student to ArrayList
                 studentArray.add(newStudent);
-                // Add Student to ListView
                 olStudents.add(newStudent.getName());
             }
             
@@ -345,18 +344,15 @@ public class StudentFXSystem extends Application {
                 taDisplayArea.appendText("Error! Please Input Valid Capacity!\n");
             }
             
-            if (!failure){
-                                
-                // Convert Course Cap to int
+            if (!failure)
+            {          
                 int cap = Integer.valueOf(txtCourseMaxCap.getText());
-                // Create new Course object
                 Course newCourse = new Course(txtCourseName.getText(), cmboBuilding.getValue().toString(),
                 txtCourseRoom.getText(), cap);
-                // Add Course to ArrayList
                 courseArray.add(newCourse);
-                // Add Course to ListView
                 olCourses.add(newCourse.getName());
             }
+            
             // Clear all values
             txtCourseName.clear();
             txtCourseRoom.clear();
@@ -366,8 +362,7 @@ public class StudentFXSystem extends Application {
         
         // Code for when Add Instructor Button Clicked
         btnAddInstructor.setOnAction(e -> 
-        {
-            
+        {           
             taDisplayArea.clear();
             boolean failure = false;
             if(txtInstructName.getText().isEmpty())
@@ -376,7 +371,6 @@ public class StudentFXSystem extends Application {
                 taDisplayArea.appendText("Error! Please Input Name!\n");
             }
             
-            // Error Check for Prefix Combo Box Being Empty
             if (cmboPrefix.getValue()== null)
             {
                 failure = true;
