@@ -114,6 +114,11 @@ public class Student {
     }
     //End Amber Holladay
     
+    public String getStudentEmail(){
+        
+        return this.studentEmail;
+    }
+    
     public void setStudentEmail(String email){
         
         this.studentEmail = email;

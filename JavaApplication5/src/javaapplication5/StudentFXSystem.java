@@ -10,6 +10,7 @@ package javaapplication5;
 import java.sql.*;
 import oracle.jdbc.pool.*;
 import java.util.*;
+import java.lang.*;
 
 // FX
 import javafx.application.Application;
@@ -558,35 +559,81 @@ public class StudentFXSystem extends Application {
         //Saves everything to the database
         //runs automatically when the program closes
         
-        ArrayList<Student> courseStudent;
-        Course currentCourse;
-        Student currentStudent;
-        
-        //Insert statements for studentenrollment table
-        for (int i = 0; i < courseArray.size(); i++){
-            
-            currentCourse = courseArray.get(i);
-            courseStudent = currentCourse.getStudentArray();
-            
-            for (int j = 0; j < courseStudent.size(); j++){
-                
-                currentStudent = courseStudent.get(j);
-                
-                String sql = "INSERT INTO JAVAUSER.STUDENTENROLLMENT (COURSEID, STUDENTID) VALUES (";
-                sql += currentCourse.getCourseID() + ",";
-                sql += currentStudent.getStudentID() + ")";
+            ArrayList<Student> courseStudent;
+            Course currentCourse;
+            Student currentStudent;
 
-                sendCommand(sql);
-                
+            //Insert statements for studentenrollment table
+            for (int i = 0; i < courseArray.size(); i++){
+
+                currentCourse = courseArray.get(i);
+                courseStudent = currentCourse.getStudentArray();
+
+                for (int j = 0; j < courseStudent.size(); j++){
+
+                    currentStudent = courseStudent.get(j);
+
+                    String sql = "INSERT INTO JAVAUSER.STUDENTENROLLMENT (COURSEID, STUDENTID) VALUES (";
+                    sql += currentCourse.getCourseID() + ",";
+                    sql += currentStudent.getStudentID() + ")";
+
+                    System.out.println(sql); //This loop currently produces the correct SQL
+
+                    sendCommand(sql);
+
+                }
             }
-        }
+
+            //insert statements for Student table
+            for ( int i = 0; i < studentArray.size(); i++){
+                
+                currentStudent = studentArray.get(i);
+                
+                String sql = "INSERT INTO JAVAUSER.STUDENT (STUDENTID, STUDENTNAME, STUDENTYEAR, STUDENTMAJOR"
+                        + ", STUDENTGPA, STUDENTEMAIL) VALUES (";
+                sql += currentStudent.getStudentID() + ",";
+                sql += currentStudent.getName() + ",";
+                sql += currentStudent.getStudentYear() + ",";
+                sql += currentStudent.getStudentMajor() + ",";
+                sql += currentStudent.getGPA() + ",";
+                sql += currentStudent.getStudentEmail() + ")";
+                
+                System.out.println(sql);//Untested
+            }
+
+            //insert statements for course table
+            
+            for ( int i = 0; i < courseArray.size(); i++){
+                
+                currentCourse = courseArray.get(i);
+                
+                String sql = "INSERT INTO JAVAUSER.STUDENT (STUDENTID, STUDENTNAME, STUDENTYEAR, STUDENTMAJOR"
+                        + ", STUDENTGPA, STUDENTEMAIL) VALUES (";
+                sql += currentCourse.getCourseID() + ",";
+                sql += currentCourse.getName() + ",";
+                sql += currentCourse.getCourseBuilding() + ",";
+                sql += currentCourse.getCourseBldgroom() + ",";
+                sql += currentCourse.getCapacity() + ")";
+                
+                System.out.println(sql);//Untested
+            }
+
+            //insert statements for instructor table
+            for ( int i = 0; i < instructorArray.size(); i++){
+                
+                currentInstructor = instructorArray.get(i);
+                
+                String sql = "INSERT INTO JAVAUSER.STUDENT (STUDENTID, STUDENTNAME, STUDENTYEAR, STUDENTMAJOR"
+                        + ", STUDENTGPA, STUDENTEMAIL) VALUES (";
+                sql += currentCourse.getCourseID() + ",";
+                sql += currentCourse.getName() + ",";
+                sql += currentCourse.getCourseBuilding() + ",";
+                sql += currentCourse.getCourseBldgroom() + ",";
+                sql += currentCourse.getCapacity() + ")";
+                
+                System.out.println(sql);//Untested
+            }
         
-        //insert statements for Student table
-        
-        //insert statements for course table
-        
-        //insert statements for instructor table
-       
     }
     
     public void sendCommand(String query){

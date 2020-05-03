@@ -58,15 +58,30 @@ public class Course
       this.courseInstructor = newInstructor;
    }
   
+   public String getCourseBldgroom(){
+       
+       return this.courseBldgRoom;
+   }
+   
    public String setCourseBldgroom(String room)
    {
        this.courseBldgRoom = room;
        return room;
    }
    
+   public String getCourseBuilding(){
+       
+       return this.courseBuilding;
+   }
+   
    public void setCourseBuilding(String building)
    {
       this.courseBuilding = building;
+   }
+   
+   public int getCapacity(){
+       
+       return this.courseCapacity;
    }
    
    public void setCapacity(int newCapacity)
