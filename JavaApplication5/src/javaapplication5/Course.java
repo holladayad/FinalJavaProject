@@ -118,6 +118,10 @@ public class Course
        return roster;
    }
    
+   public int getCourseID(){      
+       return this.CourseID;
+   }
+   
    public ArrayList getStudentArray(){
        return this.enrolledStudents;
    }

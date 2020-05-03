@@ -558,15 +558,24 @@ public class StudentFXSystem extends Application {
         //Saves everything to the database
         //runs automatically when the program closes
         
-        ArrayList courseStudent;
+        ArrayList<Student> courseStudent;
+        Course currentCourse;
+        Student currentStudent;
         
         for (int i = 0; i < courseArray.size(); i++){
             
-            Course currentCourse = courseArray.get(i);
+            currentCourse = courseArray.get(i);
             courseStudent = currentCourse.getStudentArray();
             
             for (int j = 0; j < courseStudent.size(); j++){
                 
+                currentStudent = courseStudent.get(j);
+                
+                String sql = "INSERT INTO JAVAUSER.STUDENTENROLLMENT (COURSEID, STUDENTID) VALUES (";
+                sql += currentCourse.getCourseID() + ",";
+                sql += currentStudent.getStudentID() + ")";
+
+                sendCommand(sql);
                 
             }
         }
