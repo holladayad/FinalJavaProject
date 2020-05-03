@@ -1,8 +1,3 @@
-drop table studentEnrollment;
-drop table course;
-drop table instructor;
-drop table student;
-
 create table course (
 	CourseID		INTEGER primary key,
 	CourseName		VARCHAR2(10),
