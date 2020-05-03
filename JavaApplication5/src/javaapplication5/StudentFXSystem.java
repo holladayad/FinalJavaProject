@@ -10,12 +10,12 @@ package javaapplication5;
 import java.sql.*;
 import oracle.jdbc.pool.*;
 import java.util.*;
-import java.lang.*;
+//import java.lang.*; //Unused and the yellow was getting in my way of keeping track of there the db errors are
 
 // FX
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+//import javafx.event.ActionEvent; //Unused and the yellow was getting in my way of keeping track of there the db errors are
+//import javafx.event.EventHandler; //Unused and the yellow was getting in my way of keeping track of there the db errors are
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 // ComboBoxes
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
+//import javafx.event.EventType; //Unused and the yellow was getting in my way of keeping track of there the db errors are
 import javafx.geometry.*;
 
 public class StudentFXSystem extends Application {
