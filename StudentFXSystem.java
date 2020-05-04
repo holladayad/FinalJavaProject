@@ -1,18 +1,21 @@
 /*
-Authors: 
+Authors:
 Date: Apr 28, 2020
 Assignment: Group Project Part 2
 Purpose: JavaFX Version of the Student Management System
  */
-package FinalJavaProject;
+package FinalProject.FinalJavaProject;
 
-// ArrayLists
+// ArrayLists & Database Connection
+import java.sql.*;
+import oracle.jdbc.pool.*;
 import java.util.*;
+//import java.lang.*; //Unused and the yellow was getting in my way of keeping track of there the db errors are
 
 // FX
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+//import javafx.event.ActionEvent; //Unused and the yellow was getting in my way of keeping track of there the db errors are
+//import javafx.event.EventHandler; //Unused and the yellow was getting in my way of keeping track of there the db errors are
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -21,7 +24,7 @@ import javafx.stage.Stage;
 // ComboBoxes
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
+//import javafx.event.EventType; //Unused and the yellow was getting in my way of keeping track of there the db errors are
 import javafx.geometry.*;
 
 public class StudentFXSystem extends Application {
@@ -94,8 +97,10 @@ public class StudentFXSystem extends Application {
    // public Label lblAddStudent = new Label("Add Student");
   
   
-    public CheckBox chkAddStudent = new CheckBox("Add Student");
-    public CheckBox chkRemoveStudent = new CheckBox("Remove Student");
+   // public CheckBox chkAddStudent = new CheckBox("Add Student");
+    //public CheckBox chkRemoveStudent = new CheckBox("Remove Student");
+    public RadioButton rbAddStudent = new RadioButton();
+    public RadioButton rbRemoveStudent = new RadioButton();
     public Label lblChooseStudent = new Label("Choose Student: ");       
     public Label lblToCourse = new Label("Choose Course:");
     public Label lblInstructIs = new Label("Instructor is:");
@@ -124,7 +129,12 @@ public class StudentFXSystem extends Application {
     public ComboBox cmboInstructIs = new ComboBox(olInstructors);
     
     // Display Box Creation
-    public TextArea taDisplayArea = new TextArea();    
+    public TextArea taDisplayArea = new TextArea();  
+    
+    //Database Connection
+    public Connection conn;
+    public Statement stmt;
+    public ResultSet rs;
         
     @Override
     public void start(Stage primaryStage) {
@@ -196,23 +206,26 @@ public class StudentFXSystem extends Application {
         // Add Build Course Section
         primaryPane.add(lblBuild, 2, 0);
 
-        primaryPane.add(chkAddStudent, 2, 1);
-        primaryPane.add(chkRemoveStudent, 3, 1);
+        rbAddStudent.setText("Add Student");
+        rbRemoveStudent.setText("Remove Student");
+        primaryPane.add(rbAddStudent, 2, 1);
+        primaryPane.add(rbRemoveStudent, 3, 1);
         
         
         // Disabling combo box by default, so that user will add a student first
         cmboChooseStudent.setDisable(true);
 
         // Disabling check box remove student if add student check box is selected
-        chkAddStudent.setOnAction(e ->{
-            cmboChooseStudent.setDisable(!chkAddStudent.isSelected());
-            chkRemoveStudent.setDisable(chkAddStudent.isSelected());
-                                       });
+        rbAddStudent.setOnAction(e ->
+        {
+            cmboChooseStudent.setDisable(!rbAddStudent.isSelected());
+            rbRemoveStudent.setDisable(rbAddStudent.isSelected());
+        });
         
         // Doing the inverse 
-        chkRemoveStudent.setOnAction(e ->{
-            cmboChooseStudent.setDisable(!chkRemoveStudent.isSelected());
-            chkAddStudent.setDisable(chkRemoveStudent.isSelected());
+        rbRemoveStudent.setOnAction(e ->{
+            cmboChooseStudent.setDisable(!rbRemoveStudent.isSelected());
+            rbAddStudent.setDisable(rbRemoveStudent.isSelected());
                                        });
 
         primaryPane.add(lblChooseStudent, 2, 2);
@@ -483,17 +496,6 @@ public class StudentFXSystem extends Application {
             boolean failure = false;
             boolean isStudent = false;
            
-// REMOVAL OF STUDENT
-            if (chkRemoveStudent.isSelected())
-            {
-                if(cmboChooseStudent.getValue() != null)
-                    {
-                  //  Course currentCourse = courseArray.get(cmboToCourse.getSelectionModel().getSelectedIndex());
-                    //Student currentStudent = studentArray.get(cmboChooseStudent.getSelectionModel().getSelectedIndex());
-                    //currentCourse.removeStudent(currentStudent.getStudentID());
-                    }
-            }
-// Help me 
             if (cmboToCourse.getValue() == null)
             {
                     failure = true;
@@ -528,11 +530,17 @@ public class StudentFXSystem extends Application {
                    Instructor currentInstructor = instructorArray.get(cmboInstructIs.getSelectionModel().getSelectedIndex());
                    currentCourse.assignInstructor(currentInstructor);
                 }
-                if (isStudent)
+                if (rbAddStudent.isSelected())
                 {
                     Student currentStudent = studentArray.get(cmboChooseStudent.getSelectionModel().getSelectedIndex());
                     currentCourse.enrollStudent(currentStudent);
                 }
+                if (rbRemoveStudent.isSelected())
+                {
+                    Student currentStudent = studentArray.get(cmboChooseStudent.getSelectionModel().getSelectedIndex());
+                    currentCourse.removeStudent(currentStudent.getStudentID());
+                }
+
                 taDisplayArea.appendText(currentCourse.toString()+"\n");
                 taDisplayArea.appendText(currentCourse.getRoster()+"\n");
             }
@@ -546,6 +554,123 @@ public class StudentFXSystem extends Application {
         
     }
 
+    @Override
+    public void stop(){
+        //Saves everything to the database
+        //runs automatically when the program closes
+        
+            ArrayList<Student> courseStudent;
+            Course currentCourse;
+            Student currentStudent;
+            Instructor currentInstructor;
+
+            //Insert statements for studentenrollment table
+            for (int i = 0; i < courseArray.size(); i++){
+
+                currentCourse = courseArray.get(i);
+                courseStudent = currentCourse.getStudentArray();
+
+                for (int j = 0; j < courseStudent.size(); j++){
+
+                    currentStudent = courseStudent.get(j);
+
+                    String sql = "INSERT INTO JAVAUSER.STUDENTENROLLMENT (COURSEID, STUDENTID) VALUES (";
+                    sql += currentCourse.getCourseID() + ",";
+                    sql += currentStudent.getStudentID() + ")";
+
+                    System.out.println(sql); //Tested on one iteration before crash due to db connection
+
+                    sendCommand(sql);
+
+                }
+            }
+
+            //insert statements for Student table
+            for ( int i = 0; i < studentArray.size(); i++){
+                
+                currentStudent = studentArray.get(i);
+                
+                String sql = "INSERT INTO JAVAUSER.STUDENT (STUDENTID, STUDENTNAME, STUDENTYEAR, STUDENTMAJOR"
+                        + ", STUDENTGPA, STUDENTEMAIL) VALUES (";
+                sql += currentStudent.getStudentID() + ",";
+                sql += currentStudent.getName() + ",";
+                sql += currentStudent.getStudentYear() + ",";
+                sql += currentStudent.getStudentMajor() + ",";
+                sql += currentStudent.getGPA() + ",";
+                sql += currentStudent.getStudentEmail() + ")";
+                
+                System.out.println(sql);//Untested
+            }
+
+            //insert statements for course table
+            
+            for ( int i = 0; i < courseArray.size(); i++){
+                
+                currentCourse = courseArray.get(i);
+                
+                String sql = "INSERT INTO JAVAUSER.COURSE (COURSEID, COURSENAME, COURSEBLDG, COURSEROOM"
+                        + ", COURSECAPACITY) VALUES (";
+                sql += currentCourse.getCourseID() + ",";
+                sql += currentCourse.getName() + ",";
+                sql += currentCourse.getCourseBuilding() + ",";
+                sql += currentCourse.getCourseBldgroom() + ",";
+                sql += currentCourse.getCapacity() + ")";
+                
+                System.out.println(sql);//Untested
+            }
+
+            //insert statements for instructor table
+            for ( int i = 0; i < instructorArray.size(); i++){
+                
+                currentInstructor = instructorArray.get(i);
+                
+                String sql = "INSERT INTO JAVAUSER.INSTRUCTOR (INSTRID, INSTRNAME, INSTRPREFIX, INSTROFFICE"
+                        + ", INSTRDEPT, INSTREMAIL) VALUES (";
+                sql += currentInstructor.getID() + ",";
+                sql += currentInstructor.getName() + ",";
+                sql += currentInstructor.getTitle() + ",";
+                sql += currentInstructor.getOffice() + ",";
+                sql += currentInstructor.getDept() + ",";
+                sql += currentInstructor.getEmail() + ")";
+                
+                System.out.println(sql);//Untested
+            }
+        
+    }
+    
+    public void sendCommand(String query){
+        String url = "jdbc:oracle:thin:@localhost:1521:XE";
+        String user = "javauser";
+        String pass = "javapass";
+        
+        OracleDataSource ds;
+        
+        try{
+           
+            //create the connection using the object from Oracle
+            ds = new OracleDataSource();
+            
+            //set the connection url in the object
+            ds.setURL(url);
+            
+            //attempt to connect with specified username and login, default as "javauser" and "javapass"
+            conn = ds.getConnection(user, pass);
+            
+            //handling the results
+            stmt = conn.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_READ_ONLY);
+            
+            //send the query to oracle
+            rs = stmt.executeQuery(query);
+            
+        }
+        catch(SQLException e){
+            
+            System.out.println(e.toString());
+            
+        }
+        
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
