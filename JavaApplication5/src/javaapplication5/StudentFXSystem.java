@@ -562,6 +562,7 @@ public class StudentFXSystem extends Application {
             ArrayList<Student> courseStudent;
             Course currentCourse;
             Student currentStudent;
+            Instructor currentInstructor;
 
             //Insert statements for studentenrollment table
             for (int i = 0; i < courseArray.size(); i++){
@@ -577,7 +578,7 @@ public class StudentFXSystem extends Application {
                     sql += currentCourse.getCourseID() + ",";
                     sql += currentStudent.getStudentID() + ")";
 
-                    System.out.println(sql); //This loop currently produces the correct SQL
+                    System.out.println(sql); //Tested on one iteration before crash due to db connection
 
                     sendCommand(sql);
 
@@ -607,8 +608,8 @@ public class StudentFXSystem extends Application {
                 
                 currentCourse = courseArray.get(i);
                 
-                String sql = "INSERT INTO JAVAUSER.STUDENT (STUDENTID, STUDENTNAME, STUDENTYEAR, STUDENTMAJOR"
-                        + ", STUDENTGPA, STUDENTEMAIL) VALUES (";
+                String sql = "INSERT INTO JAVAUSER.COURSE (COURSEID, COURSENAME, COURSEBLDG, COURSEROOM"
+                        + ", COURSECAPACITY) VALUES (";
                 sql += currentCourse.getCourseID() + ",";
                 sql += currentCourse.getName() + ",";
                 sql += currentCourse.getCourseBuilding() + ",";
@@ -623,13 +624,14 @@ public class StudentFXSystem extends Application {
                 
                 currentInstructor = instructorArray.get(i);
                 
-                String sql = "INSERT INTO JAVAUSER.STUDENT (STUDENTID, STUDENTNAME, STUDENTYEAR, STUDENTMAJOR"
-                        + ", STUDENTGPA, STUDENTEMAIL) VALUES (";
-                sql += currentCourse.getCourseID() + ",";
-                sql += currentCourse.getName() + ",";
-                sql += currentCourse.getCourseBuilding() + ",";
-                sql += currentCourse.getCourseBldgroom() + ",";
-                sql += currentCourse.getCapacity() + ")";
+                String sql = "INSERT INTO JAVAUSER.INSTRUCTOR (INSTRID, INSTRNAME, INSTRPREFIX, INSTROFFICE"
+                        + ", INSTRDEPT, INSTREMAIL) VALUES (";
+                sql += currentInstructor.getID() + ",";
+                sql += currentInstructor.getName() + ",";
+                sql += currentInstructor.getTitle() + ",";
+                sql += currentInstructor.getOffice() + ",";
+                sql += currentInstructor.getDept() + ",";
+                sql += currentInstructor.getEmail() + ")";
                 
                 System.out.println(sql);//Untested
             }
