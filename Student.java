@@ -90,6 +90,11 @@ public class Student {
             
         nextStudentID++;
     }
+    public Student(int ID, String name, String year, String major, double GPA, String email)
+    {
+        
+    }
+    
     
     public void setGPA(double GPA){
         

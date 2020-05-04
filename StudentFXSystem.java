@@ -10,12 +10,9 @@ package FinalProject.FinalJavaProject;
 import java.sql.*;
 import oracle.jdbc.pool.*;
 import java.util.*;
-//import java.lang.*; //Unused and the yellow was getting in my way of keeping track of there the db errors are
 
 // FX
 import javafx.application.Application;
-//import javafx.event.ActionEvent; //Unused and the yellow was getting in my way of keeping track of there the db errors are
-//import javafx.event.EventHandler; //Unused and the yellow was getting in my way of keeping track of there the db errors are
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -24,7 +21,6 @@ import javafx.stage.Stage;
 // ComboBoxes
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-//import javafx.event.EventType; //Unused and the yellow was getting in my way of keeping track of there the db errors are
 import javafx.geometry.*;
 
 public class StudentFXSystem extends Application {
@@ -94,11 +90,7 @@ public class StudentFXSystem extends Application {
     public Button btnAddInstructor = new Button("Add Instructor ->");
    
     // Build a Course
-   // public Label lblAddStudent = new Label("Add Student");
-  
-  
-   // public CheckBox chkAddStudent = new CheckBox("Add Student");
-    //public CheckBox chkRemoveStudent = new CheckBox("Remove Student");
+
     public RadioButton rbAddStudent = new RadioButton();
     public RadioButton rbRemoveStudent = new RadioButton();
     public Label lblChooseStudent = new Label("Choose Student: ");       
@@ -592,14 +584,16 @@ public class StudentFXSystem extends Application {
                 
                 String sql = "INSERT INTO JAVAUSER.STUDENT (STUDENTID, STUDENTNAME, STUDENTYEAR, STUDENTMAJOR"
                         + ", STUDENTGPA, STUDENTEMAIL) VALUES (";
-                sql += currentStudent.getStudentID() + ",";
-                sql += currentStudent.getName() + ",";
-                sql += currentStudent.getStudentYear() + ",";
-                sql += currentStudent.getStudentMajor() + ",";
-                sql += currentStudent.getGPA() + ",";
-                sql += currentStudent.getStudentEmail() + ")";
+                sql += currentStudent.getStudentID() + ",'";
+                sql += currentStudent.getName() + "','";
+                sql += currentStudent.getStudentYear() + "','";
+                sql += currentStudent.getStudentMajor() + "',";
+                sql += currentStudent.getGPA() + ",'";
+                sql += currentStudent.getStudentEmail() + "')";
                 
-                System.out.println(sql);//Untested
+                System.out.println(sql);//Tested, works
+                
+                sendCommand(sql);
             }
 
             //insert statements for course table
@@ -610,13 +604,15 @@ public class StudentFXSystem extends Application {
                 
                 String sql = "INSERT INTO JAVAUSER.COURSE (COURSEID, COURSENAME, COURSEBLDG, COURSEROOM"
                         + ", COURSECAPACITY) VALUES (";
-                sql += currentCourse.getCourseID() + ",";
-                sql += currentCourse.getName() + ",";
-                sql += currentCourse.getCourseBuilding() + ",";
-                sql += currentCourse.getCourseBldgroom() + ",";
+                sql += currentCourse.getCourseID() + ",'";
+                sql += currentCourse.getName() + "','";
+                sql += currentCourse.getCourseBuilding() + "','";
+                sql += currentCourse.getCourseBldgroom() + "',";
                 sql += currentCourse.getCapacity() + ")";
                 
-                System.out.println(sql);//Untested
+                System.out.println(sql);//Tested, works
+                
+                sendCommand(sql);
             }
 
             //insert statements for instructor table
@@ -626,14 +622,16 @@ public class StudentFXSystem extends Application {
                 
                 String sql = "INSERT INTO JAVAUSER.INSTRUCTOR (INSTRID, INSTRNAME, INSTRPREFIX, INSTROFFICE"
                         + ", INSTRDEPT, INSTREMAIL) VALUES (";
-                sql += currentInstructor.getID() + ",";
-                sql += currentInstructor.getName() + ",";
-                sql += currentInstructor.getTitle() + ",";
-                sql += currentInstructor.getOffice() + ",";
-                sql += currentInstructor.getDept() + ",";
-                sql += currentInstructor.getEmail() + ")";
+                sql += currentInstructor.getID() + ",'";
+                sql += currentInstructor.getName() + "','";
+                sql += currentInstructor.getTitle() + "','";
+                sql += currentInstructor.getOffice() + "','";
+                sql += currentInstructor.getDept() + "','";
+                sql += currentInstructor.getEmail() + "')";
                 
-                System.out.println(sql);//Untested
+                System.out.println(sql);//Tested, Works
+                
+                sendCommand(sql);
             }
         
     }
