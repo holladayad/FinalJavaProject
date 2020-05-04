@@ -1,5 +1,5 @@
 /*
-Authors:
+Authors: 
 Date: Apr 28, 2020
 Assignment: Group Project Part 2
 Purpose: JavaFX Version of the Student Management System
