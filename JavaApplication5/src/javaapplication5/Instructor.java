@@ -63,6 +63,22 @@ public class Instructor
         return this.prefix + " " + this.name;
     }
     
+    public int getID(){
+        return this.instructorID;
+    }
+    
+    public String getOffice(){
+        return this.officeLocation;
+    }
+    
+    public String getDept(){
+        return this.department;
+    }
+    
+    public String getEmail(){
+        return this.email;
+    }
+    
     @Override
     public String toString() //Amber Holladay
     {
