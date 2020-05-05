@@ -20,19 +20,22 @@ public class Student {
     
     Scanner in = new Scanner(System.in);
     
-    public Student(String name, int year, String major, double GPA, String email){
-        
+    public Student(String name, int year, String major, double GPA, String email)
+    {
         String first; //first name 
         String last; //last name
         int end = 0; //end of first name
         int beg; //beg of last name
         
         //Find the first name index values
-        for (int count = 0; count < name.length(); count++){
-            if (name.charAt(count) == ' '){ //if the current character is a space, record the index
+        for (int count = 0; count < name.length(); count++)
+        {
+            if (name.charAt(count) == ' ') //if the current character is a space, record the index
+            { 
                 end = count;
             }
-        }      
+        }   
+        
         beg = end + 1; //record the index of the beginning of the last name
                 
         first = name.substring(0, end);
@@ -40,7 +43,8 @@ public class Student {
         
         String newYear = "";
         
-        switch (year) {
+        switch (year)
+        {
             case 1: newYear = "Freshman";
             break;
             case 2: newYear = "Sophomore";
@@ -62,7 +66,9 @@ public class Student {
         nextStudentID++;
     }
     
-    public Student(String name, String year, String major, double GPA, String email){
+    // Override to accept pre-existing Students with assigned IDs
+    public Student(int stuID, String name, String year, String major, double GPA, String email)
+    {
         
         String first; //first name 
         String last; //last name
@@ -70,11 +76,14 @@ public class Student {
         int beg; //beg of last name
         
         //Find the first name index values
-        for (int count = 0; count < name.length(); count++){
-            if (name.charAt(count) == ' '){ //if the current character is a space, record the index
+        for (int count = 0; count < name.length(); count++)
+        {
+            if (name.charAt(count) == ' ') //if the current character is a space, record the index
+            { 
                 end = count;
             }
-        }      
+        }  
+        
         beg = end + 1; //record the index of the beginning of the last name
                 
         first = name.substring(0, end);
@@ -86,58 +95,52 @@ public class Student {
         this.studentMajor = major;
         this.GPA = GPA;
         this.studentEmail = email;
-        this.studentID = nextStudentID;
+        this.studentID = stuID;
             
-        nextStudentID++;
+        nextStudentID = stuID + 1;
     }
-    public Student(int ID, String name, String year, String major, double GPA, String email)
+    
+    public void setGPA(double GPA)
     {
-        
-    }
-    
-    
-    public void setGPA(double GPA){
-        
         this.GPA = GPA;
     }
     
     //Start Amber Holladay
-    public double getGPA(){
-        
+    public double getGPA()
+    {        
         return this.GPA;
     }
     
-    public String getName(){
-        
+    public String getName()
+    {        
         return this.lastName + ", " + this.firstName;
     }
-    
-    
-    public int getStudentID(){
         
+    public int getStudentID()
+    {        
         return this.studentID;
     }
     //End Amber Holladay
     
-    public String getStudentEmail(){
-        
+    public String getStudentEmail()
+    {        
         return this.studentEmail;
     }
     
-    public void setStudentEmail(String email){
-        
+    public void setStudentEmail(String email)
+    {        
         this.studentEmail = email;
     }
     
     //Begin Amber Holladay
-    public String getStudentYear(){
-        
+    public String getStudentYear()
+    {       
         return this.studentYear;
     }
     //End Amber Holladay
     
-    public void setStudentYear(int year){
-        
+    public void setStudentYear(int year)
+    {       
         String newYear = "";
         
         switch (year) {
@@ -154,13 +157,13 @@ public class Student {
         
     }
     
-    public String getStudentMajor(){
-        
+    public String getStudentMajor()
+    {        
         return this.studentMajor;
     }
     
-    public void setStudentMajor(String major){
-        
+    public void setStudentMajor(String major)
+    {        
         this.studentMajor = major;
     }
 }
