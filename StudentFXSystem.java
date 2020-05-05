@@ -664,6 +664,7 @@ public class StudentFXSystem extends Application
         // For each row, create new Student instance object, load into memory, save into array
         // Call this method from end of start() method
         // Make sure to update combo box
+        // Ezell said in his notes that "once oyu get the saving to the DB working for one data type, copying and adjusting logic for others is not hard"
     }
     
     public static void main(String[] args)
