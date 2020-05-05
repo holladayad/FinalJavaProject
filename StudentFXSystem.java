@@ -1,5 +1,5 @@
 /*
-Authors:
+Authors: Amber Holladay, Paige Kowahl, Zach Melusen, Emma Morell, Gonzo Ocampo
 Date: Apr 28, 2020
 Assignment: Group Project Part 2
 Purpose: JavaFX Version of the Student Management System
@@ -23,7 +23,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.*;
 
-public class StudentFXSystem extends Application {
+public class StudentFXSystem extends Application
+{
     
     public static ArrayList<Student> studentArray = new ArrayList<>();
     public static ArrayList<Course> courseArray = new ArrayList<>();
@@ -129,8 +130,8 @@ public class StudentFXSystem extends Application {
     public ResultSet rs;
         
     @Override
-    public void start(Stage primaryStage) {
-        
+    public void start(Stage primaryStage)
+    {        
         // Pane
         GridPane primaryPane = new GridPane();
         
@@ -203,7 +204,6 @@ public class StudentFXSystem extends Application {
         primaryPane.add(rbAddStudent, 2, 1);
         primaryPane.add(rbRemoveStudent, 3, 1);
         
-        
         // Disabling combo box by default, so that user will add a student first
         cmboChooseStudent.setDisable(true);
 
@@ -215,10 +215,11 @@ public class StudentFXSystem extends Application {
         });
         
         // Doing the inverse 
-        rbRemoveStudent.setOnAction(e ->{
+        rbRemoveStudent.setOnAction(e ->
+        {
             cmboChooseStudent.setDisable(!rbRemoveStudent.isSelected());
             rbAddStudent.setDisable(rbRemoveStudent.isSelected());
-                                       });
+        });
 
         primaryPane.add(lblChooseStudent, 2, 2);
         primaryPane.add(cmboChooseStudent, 3, 2);
@@ -230,9 +231,10 @@ public class StudentFXSystem extends Application {
       
         cmboInstructIs.setDisable(true);
        
-        chkNewInstruct.setOnAction(e ->{
+        chkNewInstruct.setOnAction(e ->
+        {
             cmboInstructIs.setDisable(!chkNewInstruct.isSelected());
-             });
+        });
   
         primaryPane.add(lblInstructIs, 2, 5);
         primaryPane.add(cmboInstructIs, 3, 5);
@@ -247,13 +249,6 @@ public class StudentFXSystem extends Application {
         primaryStage.setScene(primaryScene);
         primaryStage.show();
         
-        /*        
-        TO APPLICATION FILE:
-        
-        Method one: Non-static, update ComboBox Lists
-        Method Two: Non-static, populate output area based on selected course
-        */
-        
         // Code for when Add Student Button Clicked
         btnAddStudent.setOnAction(e -> 
         {            
@@ -265,7 +260,6 @@ public class StudentFXSystem extends Application {
                 taDisplayArea.appendText("Error! Please Input Name!\n");
             }
             
-                        
             // Error Check for Year Combo Box Being Empty
             if (cmboYear.getValue()== null)
             {
@@ -325,16 +319,16 @@ public class StudentFXSystem extends Application {
                 }
             }
             
-            // Convert the Year selection to the int equivalent
-            
-            if (!failure){
+            if (!failure)
+            {
                 // Create new Student object
                 Double dblGPA = Double.valueOf(txtStudentGPA.getText());
+                
                 Student newStudent = new Student(txtStudentName.getText(), cmboYear.getValue().toString(), txtStudentMajor.getText(), 
                 dblGPA, txtStudentEmail.getText());
-                // Add Student to ArrayList
+                
                 studentArray.add(newStudent);
-                // Add Student to ListView
+                
                 olStudents.add(newStudent.getName());
             }
             
@@ -350,15 +344,15 @@ public class StudentFXSystem extends Application {
         // Code for when Add Course Button Clicked
         btnAddCourse.setOnAction(e -> 
         {
-            
-            
             taDisplayArea.clear();
             boolean failure = false;
+            
             if(txtCourseName.getText().isEmpty())
             {
                 failure = true;
                 taDisplayArea.appendText("Error! Please Input Name!\n");
             }
+            
             //Error Check for Building Combo Box Being Empty
             if (cmboBuilding.getValue()== null)
             {
@@ -377,19 +371,19 @@ public class StudentFXSystem extends Application {
                 taDisplayArea.appendText("Error! Please Input Valid Capacity!\n");
             }
             
-            if (!failure){
-                                
-                // Convert Course Cap to int
-                int cap = Integer.valueOf(txtCourseMaxCap.getText());
+            if (!failure)
+            {         
                 // Create new Course object
+                int cap = Integer.valueOf(txtCourseMaxCap.getText());
+                
                 Course newCourse = new Course(txtCourseName.getText(), cmboBuilding.getValue().toString(),
                 txtCourseRoom.getText(), cap);
-                // Add Course to ArrayList
+
                 courseArray.add(newCourse);
-                // Add Course to ListView
                 olCourses.add(newCourse.getName());
             }
-            // Clear all values
+            
+            // Clear all fields
             txtCourseName.clear();
             txtCourseRoom.clear();
             txtCourseMaxCap.clear();
@@ -399,7 +393,6 @@ public class StudentFXSystem extends Application {
         // Code for when Add Instructor Button Clicked
         btnAddInstructor.setOnAction(e -> 
         {
-            
             taDisplayArea.clear();
             boolean failure = false;
             if(txtInstructName.getText().isEmpty())
@@ -455,17 +448,18 @@ public class StudentFXSystem extends Application {
                 }
                 
             }
-            if (!failure){
+            
+            if (!failure)
+            {
             // Create new Instruct object
-            //public Instructor(String name, String prefix, String office, String dept, String email)
+
             Instructor newInstructor = new Instructor(txtInstructName.getText(), cmboPrefix.getValue().toString(),
             txtInstructOffice.getText(),txtInstructDept.getText(), txtInstructEmail.getText());
             
-            // Add Instruct to ArrayList
             instructorArray.add(newInstructor);
-            // Add Instruct to ListView
             olInstructors.add(newInstructor.getName());
             }
+            
             // Clear all values
             txtInstructName.clear();
             txtInstructOffice.clear();
@@ -478,13 +472,7 @@ public class StudentFXSystem extends Application {
         btnUpdateCourse.setOnAction(e -> 
         {
             taDisplayArea.clear();
-            /*
-            -> Need to be able to add student to course regardless of "New Instructor"
-            checkbox setting without changing any other data.
-            -> Inversely, need to add instructor w/out adding a student
-            HINT: if ComboBox is empty, index = -1
-            -> disable ComboBox unless checked will require if/else statements
-            */
+
             boolean failure = false;
             boolean isStudent = false;
            
@@ -536,6 +524,7 @@ public class StudentFXSystem extends Application {
                 taDisplayArea.appendText(currentCourse.toString()+"\n");
                 taDisplayArea.appendText(currentCourse.getRoster()+"\n");
             }
+            
             //Clear all fields
             cmboChooseStudent.getSelectionModel().clearSelection();
             cmboToCourse.getSelectionModel().clearSelection();
@@ -543,108 +532,108 @@ public class StudentFXSystem extends Application {
             chkNewInstruct.setSelected(false);
             cmboInstructIs.setDisable(true);
         });
-        
     }
 
     @Override
-    public void stop(){
+    public void stop()
+    {
         //Saves everything to the database
         //runs automatically when the program closes
         
-            ArrayList<Student> courseStudent;
-            Course currentCourse;
-            Student currentStudent;
-            Instructor currentInstructor;
+        ArrayList<Student> courseStudent;
+        Course currentCourse;
+        Student currentStudent;
+        Instructor currentInstructor;
 
-            //Insert statements for studentenrollment table
-            for (int i = 0; i < courseArray.size(); i++){
+        //Insert statements for studentenrollment table
+        for (int i = 0; i < courseArray.size(); i++)
+        {
+            currentCourse = courseArray.get(i);
+            courseStudent = currentCourse.getStudentArray();
 
-                currentCourse = courseArray.get(i);
-                courseStudent = currentCourse.getStudentArray();
+            for (int j = 0; j < courseStudent.size(); j++)
+            {
+                currentStudent = courseStudent.get(j);
 
-                for (int j = 0; j < courseStudent.size(); j++){
+                String sql = "INSERT INTO JAVAUSER.STUDENTENROLLMENT (COURSEID, STUDENTID) VALUES (";
+                sql += currentCourse.getCourseID() + ",";
+                sql += currentStudent.getStudentID() + ")";
 
-                    currentStudent = courseStudent.get(j);
+                System.out.println(sql); //Tested on one iteration before crash due to db connection
 
-                    String sql = "INSERT INTO JAVAUSER.STUDENTENROLLMENT (COURSEID, STUDENTID) VALUES (";
-                    sql += currentCourse.getCourseID() + ",";
-                    sql += currentStudent.getStudentID() + ")";
-
-                    System.out.println(sql); //Tested on one iteration before crash due to db connection
-
-                    sendCommand(sql);
-
-                }
-            }
-
-            //insert statements for Student table
-            for ( int i = 0; i < studentArray.size(); i++){
-                
-                currentStudent = studentArray.get(i);
-                
-                String sql = "INSERT INTO JAVAUSER.STUDENT (STUDENTID, STUDENTNAME, STUDENTYEAR, STUDENTMAJOR"
-                        + ", STUDENTGPA, STUDENTEMAIL) VALUES (";
-                sql += currentStudent.getStudentID() + ",'";
-                sql += currentStudent.getName() + "','";
-                sql += currentStudent.getStudentYear() + "','";
-                sql += currentStudent.getStudentMajor() + "',";
-                sql += currentStudent.getGPA() + ",'";
-                sql += currentStudent.getStudentEmail() + "')";
-                
-                System.out.println(sql);//Tested, works
-                
                 sendCommand(sql);
-            }
 
-            //insert statements for course table
-            
-            for ( int i = 0; i < courseArray.size(); i++){
-                
-                currentCourse = courseArray.get(i);
-                
-                String sql = "INSERT INTO JAVAUSER.COURSE (COURSEID, COURSENAME, COURSEBLDG, COURSEROOM"
-                        + ", COURSECAPACITY) VALUES (";
-                sql += currentCourse.getCourseID() + ",'";
-                sql += currentCourse.getName() + "','";
-                sql += currentCourse.getCourseBuilding() + "','";
-                sql += currentCourse.getCourseBldgroom() + "',";
-                sql += currentCourse.getCapacity() + ")";
-                
-                System.out.println(sql);//Tested, works
-                
-                sendCommand(sql);
             }
+        }
 
-            //insert statements for instructor table
-            for ( int i = 0; i < instructorArray.size(); i++){
-                
-                currentInstructor = instructorArray.get(i);
-                
-                String sql = "INSERT INTO JAVAUSER.INSTRUCTOR (INSTRID, INSTRNAME, INSTRPREFIX, INSTROFFICE"
-                        + ", INSTRDEPT, INSTREMAIL) VALUES (";
-                sql += currentInstructor.getID() + ",'";
-                sql += currentInstructor.getName() + "','";
-                sql += currentInstructor.getTitle() + "','";
-                sql += currentInstructor.getOffice() + "','";
-                sql += currentInstructor.getDept() + "','";
-                sql += currentInstructor.getEmail() + "')";
-                
-                System.out.println(sql);//Tested, Works
-                
-                sendCommand(sql);
-            }
-        
+        //insert statements for Student table
+        for ( int i = 0; i < studentArray.size(); i++)
+        {                
+            currentStudent = studentArray.get(i);
+
+            String sql = "INSERT INTO JAVAUSER.STUDENT (STUDENTID, STUDENTNAME, STUDENTYEAR, STUDENTMAJOR"
+                    + ", STUDENTGPA, STUDENTEMAIL) VALUES (";
+            sql += currentStudent.getStudentID() + ",'";
+            sql += currentStudent.getName() + "','";
+            sql += currentStudent.getStudentYear() + "','";
+            sql += currentStudent.getStudentMajor() + "',";
+            sql += currentStudent.getGPA() + ",'";
+            sql += currentStudent.getStudentEmail() + "')";
+
+            System.out.println(sql);//Tested, works
+
+            sendCommand(sql);
+        }
+
+        //insert statements for course table
+
+        for ( int i = 0; i < courseArray.size(); i++)
+        {                
+            currentCourse = courseArray.get(i);
+
+            String sql = "INSERT INTO JAVAUSER.COURSE (COURSEID, COURSENAME, COURSEBLDG, COURSEROOM"
+                    + ", COURSECAPACITY) VALUES (";
+            sql += currentCourse.getCourseID() + ",'";
+            sql += currentCourse.getName() + "','";
+            sql += currentCourse.getCourseBuilding() + "','";
+            sql += currentCourse.getCourseBldgroom() + "',";
+            sql += currentCourse.getCapacity() + ")";
+
+            System.out.println(sql);//Tested, works
+
+            sendCommand(sql);
+        }
+
+        //insert statements for instructor table
+        for ( int i = 0; i < instructorArray.size(); i++)
+        {                
+            currentInstructor = instructorArray.get(i);
+
+            String sql = "INSERT INTO JAVAUSER.INSTRUCTOR (INSTRID, INSTRNAME, INSTRPREFIX, INSTROFFICE"
+                    + ", INSTRDEPT, INSTREMAIL) VALUES (";
+            sql += currentInstructor.getID() + ",'";
+            sql += currentInstructor.getName() + "','";
+            sql += currentInstructor.getTitle() + "','";
+            sql += currentInstructor.getOffice() + "','";
+            sql += currentInstructor.getDept() + "','";
+            sql += currentInstructor.getEmail() + "')";
+
+            System.out.println(sql);//Tested, Works
+
+            sendCommand(sql);
+        }
     }
     
-    public void sendCommand(String query){
+    public void sendCommand(String query)
+    {
         String url = "jdbc:oracle:thin:@localhost:1521:XE";
         String user = "javauser";
         String pass = "javapass";
         
         OracleDataSource ds;
         
-        try{
-           
+        try
+        {          
             //create the connection using the object from Oracle
             ds = new OracleDataSource();
             
@@ -661,15 +650,24 @@ public class StudentFXSystem extends Application {
             rs = stmt.executeQuery(query);
             
         }
-        catch(SQLException e){
-            
-            System.out.println(e.toString());
-            
-        }
         
+        catch(SQLException e)
+        {           
+            System.out.println(e.toString());           
+        }       
     }
     
-    public static void main(String[] args) {
+    // Implements a data read from the Student DB Table
+    public void loadDataFromDB()
+    {
+        // Select all rows from Student
+        // For each row, create new Student instance object, load into memory, save into array
+        // Call this method from end of start() method
+        // Make sure to update combo box
+    }
+    
+    public static void main(String[] args)
+    {
         launch(args);
     }
     
