@@ -1,5 +1,5 @@
 /*
-Author: Amber Holladay, Paige Kowahl, Emma Morell, Gonzo Ocampo
+Author: Amber Holladay, Paige Kowahl, Zach Melusen, Emma Morell, Gonzo Ocampo
 Date: Apr 21, 2020
 Assignment: Group Project Part 1
 Purpose: To run the Student Management System

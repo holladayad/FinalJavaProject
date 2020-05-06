@@ -10,6 +10,8 @@ package FinalProject.FinalJavaProject;
 import java.sql.*;
 import oracle.jdbc.pool.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // FX
 import javafx.application.Application;
@@ -130,7 +132,7 @@ public class StudentFXSystem extends Application
     public ResultSet rs;
         
     @Override
-    public void start(Stage primaryStage)
+    public void start(Stage primaryStage) throws SQLException
     {        
         // Pane
         GridPane primaryPane = new GridPane();
@@ -249,6 +251,8 @@ public class StudentFXSystem extends Application
         primaryStage.setScene(primaryScene);
         primaryStage.show();
         
+        loadDataFromDB();
+        
         // Code for when Add Student Button Clicked
         btnAddStudent.setOnAction(e -> 
         {            
@@ -324,7 +328,29 @@ public class StudentFXSystem extends Application
                 // Create new Student object
                 Double dblGPA = Double.valueOf(txtStudentGPA.getText());
                 
-                Student newStudent = new Student(txtStudentName.getText(), Integer.parseInt(cmboYear.getValue().toString()), txtStudentMajor.getText(), 
+                int year = 0;
+                
+                if(cmboYear.getValue().toString().equals("Freshman"))
+                {
+                    year = 1;
+                }
+                
+                if(cmboYear.getValue().toString().equals("Sophomore"))
+                {
+                    year = 2;
+                }
+                
+                if(cmboYear.getValue().toString().equals("Junior"))
+                {
+                    year = 3;
+                }
+                
+                if(cmboYear.getValue().toString().equals("Senior"))
+                {
+                    year = 4;
+                }
+                
+                Student newStudent = new Student(txtStudentName.getText(), year, txtStudentMajor.getText(), 
                 dblGPA, txtStudentEmail.getText());
                 
                 studentArray.add(newStudent);
@@ -658,13 +684,43 @@ public class StudentFXSystem extends Application
     }
     
     // Implements a data read from the Student DB Table
-    public void loadDataFromDB()
+    public void loadDataFromDB() throws SQLException
     {
-        // Select all rows from Student
-        // For each row, create new Student instance object, load into memory, save into array
-        // Call this method from end of start() method
-        // Make sure to update combo box
-        // Ezell said in his notes that "once oyu get the saving to the DB working for one data type, copying and adjusting logic for others is not hard"
+        String allRows = "SELECT * FROM STUDENT";
+        sendCommand(allRows);
+        
+        int rowCt = 0;
+
+            Student createStu;
+            while(rs.next())
+            {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String year = rs.getString(3);
+                String major = rs.getString(4);
+                double gpa = rs.getDouble(5);
+                String email = rs.getString(6);
+                
+                int newYear = 0;
+        
+        switch (year)
+        {
+            case "Freshman": newYear = 1;
+            break;
+            case "Sophomore": newYear = 2;
+            break;
+            case "Junior": newYear = 3;
+            break;
+            case "Senior": newYear = 4;
+            break;
+        }
+
+                createStu = new Student(id, name, newYear, major, gpa, email);
+
+                studentArray.add(createStu);
+                olStudents.add(createStu.getName());
+            }
+        
     }
     
     public static void main(String[] args)

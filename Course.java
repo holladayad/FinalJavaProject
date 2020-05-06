@@ -1,5 +1,5 @@
 /*
-Author: Amber Holladay and Gonzo Ocamp
+Author: Amber Holladay, Paige Kowahl, Zach Melusen, Emma Morell, Gonzo Ocampo
 Date: Apr 24, 2020
 Assignment: Group Project Part 1
 Purpose: Course Class to create new Course objects for overall program

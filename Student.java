@@ -1,5 +1,5 @@
 /*
-Author: Emma Morell (unless otherwise noted), Amber Holladay
+Author: Amber Holladay, Paige Kowahl, Zach Melusen, Emma Morell, Gonzo Ocampo 
 Date: Apr 24, 2020
 Assignment: Group Project Part 1
 Purpose: Student Class to create new Student Objects for the overall program.
@@ -67,7 +67,7 @@ public class Student {
     }
     
     // Override to accept pre-existing Students with assigned IDs
-    public Student(int stuID, String name, String year, String major, double GPA, String email)
+    public Student(int stuID, String name, int year, String major, double GPA, String email)
     {
         
         String first; //first name 
@@ -89,9 +89,23 @@ public class Student {
         first = name.substring(0, end);
         last = name.substring(beg, name.length());
             
+        String newYear = "";
+        
+        switch (year)
+        {
+            case 1: newYear = "Freshman";
+            break;
+            case 2: newYear = "Sophomore";
+            break;
+            case 3: newYear = "Junior";
+            break;
+            case 4: newYear = "Senior";
+            break;
+        }
+        
         this.firstName = first;
         this.lastName = last;
-        this.studentYear = year;
+        this.studentYear = newYear;
         this.studentMajor = major;
         this.GPA = GPA;
         this.studentEmail = email;

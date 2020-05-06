@@ -1,5 +1,5 @@
 /*
-Author: Paige Kowahl (unless otherwise noted), Amber Holladay
+Author: Amber Holladay, Paige Kowahl, Zach Melusen, Emma Morell, Gonzo Ocampo
 Date: Apr 21, 2020
 Assignment: Group Project Part 1
 Purpose: Instructor Class to create new Instructor Objects for the overall program.
