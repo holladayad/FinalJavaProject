@@ -324,7 +324,7 @@ public class StudentFXSystem extends Application
                 // Create new Student object
                 Double dblGPA = Double.valueOf(txtStudentGPA.getText());
                 
-                Student newStudent = new Student(txtStudentName.getText(), cmboYear.getValue().toString(), txtStudentMajor.getText(), 
+                Student newStudent = new Student(txtStudentName.getText(), Integer.parseInt(cmboYear.getValue().toString()), txtStudentMajor.getText(), 
                 dblGPA, txtStudentEmail.getText());
                 
                 studentArray.add(newStudent);
